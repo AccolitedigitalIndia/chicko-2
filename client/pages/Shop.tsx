@@ -1,53 +1,27 @@
 import { BottomNav } from "@/components/BottomNav";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { Search, SlidersHorizontal, Heart } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useFavorites } from "@/context/FavoritesContext";
+import { products as allProducts, categories } from "@shared/products";
 
 export default function Shop() {
-  const [activeFilter, setActiveFilter] = useState("All");
+  const [searchParams] = useSearchParams();
+  const categoryParam = searchParams.get("category");
+  const [activeFilter, setActiveFilter] = useState(categoryParam || "all");
   const { toggleFavorite, isFavorite } = useFavorites();
 
-  const filters = ["All", "New", "Dresses", "Tops", "Jackets", "Accessories"];
+  useEffect(() => {
+    if (categoryParam) {
+      setActiveFilter(categoryParam);
+    }
+  }, [categoryParam]);
 
-  const products = [
-    {
-      id: 1,
-      name: "Silk Blend Tunic",
-      price: 89.50,
-      image: "https://api.builder.io/api/v1/image/assets/TEMP/8af39074281630082168c452fc72bdaf2138be53?width=366",
-    },
-    {
-      id: 2,
-      name: "Classic Wrap Dress",
-      price: 119.00,
-      image: "https://api.builder.io/api/v1/image/assets/TEMP/2ddc134b0c58a62bf03b2ecd3b5e270e5274f2e9?width=366",
-    },
-    {
-      id: 3,
-      name: "Statement Blazer",
-      price: 149.00,
-      image: "https://api.builder.io/api/v1/image/assets/TEMP/f67f230abffed2738ae3cbc3d943655440eb1c74?width=366",
-    },
-    {
-      id: 4,
-      name: "Artisan Necklace",
-      price: 45.00,
-      image: "https://api.builder.io/api/v1/image/assets/TEMP/49a02839c723043613b28fac743b3b2ce108ed73?width=366",
-    },
-    {
-      id: 5,
-      name: "Relaxed Linen Set",
-      price: 129.00,
-      image: "https://api.builder.io/api/v1/image/assets/TEMP/791488612b362212273f22e8ab46080f3cebb267?width=366",
-    },
-    {
-      id: 6,
-      name: "Embroidered Top",
-      price: 79.50,
-      image: "https://api.builder.io/api/v1/image/assets/TEMP/8af39074281630082168c452fc72bdaf2138be53?width=366",
-    },
-  ];
+  const filters = ["all", ...categories.map(cat => cat.id)];
+
+  const filteredProducts = activeFilter === "all"
+    ? allProducts
+    : allProducts.filter(product => product.category === activeFilter);
 
   return (
     <div className="min-h-screen bg-white pb-20">
@@ -69,29 +43,34 @@ export default function Shop() {
         </div>
 
         <div className="flex gap-2 overflow-x-auto scrollbar-hide">
-          {filters.map((filter) => (
-            <button
-              key={filter}
-              onClick={() => setActiveFilter(filter)}
-              className={`px-5 py-2 rounded-full text-base font-normal tracking-[-0.312px] whitespace-nowrap ${
-                activeFilter === filter
-                  ? "bg-brand-pink text-white"
-                  : "bg-[#F3F4F6] text-[#364153]"
-              }`}
-            >
-              {filter}
-            </button>
-          ))}
+          {filters.map((filter) => {
+            const categoryName = filter === "all"
+              ? "All"
+              : categories.find(cat => cat.id === filter)?.name || filter;
+            return (
+              <button
+                key={filter}
+                onClick={() => setActiveFilter(filter)}
+                className={`px-5 py-2 rounded-full text-base font-normal tracking-[-0.312px] whitespace-nowrap ${
+                  activeFilter === filter
+                    ? "bg-brand-pink text-white"
+                    : "bg-[#F3F4F6] text-[#364153]"
+                }`}
+              >
+                {categoryName}
+              </button>
+            );
+          })}
         </div>
       </div>
 
       <div className="px-6 pb-8">
         <p className="text-[#6A7282] text-sm tracking-[-0.15px] mb-4">
-          {products.length} items
+          {filteredProducts.length} items
         </p>
 
         <div className="grid grid-cols-2 gap-4">
-          {products.map((product) => {
+          {filteredProducts.map((product) => {
             const isFav = isFavorite(product.id);
             return (
               <Link key={product.id} to={`/product/${product.id}`} className="flex flex-col">

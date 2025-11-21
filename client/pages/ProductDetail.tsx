@@ -1,29 +1,40 @@
 import { BottomNav } from "@/components/BottomNav";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ChevronLeft, Share2, Heart, Star } from "lucide-react";
 import { useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { useFavorites } from "@/context/FavoritesContext";
 import { toast } from "@/hooks/use-toast";
+import { getProductById } from "@shared/products";
 
 export default function ProductDetail() {
   const navigate = useNavigate();
+  const { id } = useParams();
   const { addToCart } = useCart();
   const { toggleFavorite, isFavorite } = useFavorites();
-  const [selectedColor, setSelectedColor] = useState("Ivory");
+
+  const product = getProductById(Number(id));
+
+  if (!product) {
+    return (
+      <div className="min-h-screen bg-white pb-20 flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-gray-medium text-base mb-4">Product not found</p>
+          <button
+            onClick={() => navigate("/shop")}
+            className="px-6 py-3 bg-brand-pink text-white rounded-full text-base font-normal tracking-[-0.312px]"
+          >
+            Back to Shop
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const [selectedSize, setSelectedSize] = useState("");
 
-  const product = {
-    id: 1,
-    name: "Silk Blend Tunic",
-    price: 89.50,
-    image: "https://api.builder.io/api/v1/image/assets/TEMP/a8a2c6008052338846cae6bec260590dfa3e5cde?width=192",
-  };
-
   const isFav = isFavorite(product.id);
-
-  const colors = ["Ivory", "Blush", "Navy"];
-  const sizes = ["XS", "S", "M", "L", "XL"];
 
   const handleAddToBag = () => {
     if (!selectedSize) {
@@ -43,7 +54,7 @@ export default function ProductDetail() {
 
     toast({
       title: "Added to bag",
-      description: `${selectedColor} Silk Blend Tunic (${selectedSize}) added to your bag`,
+      description: `${selectedColor} ${product.name} (${selectedSize}) added to your bag`,
     });
   };
 
@@ -51,8 +62,8 @@ export default function ProductDetail() {
     <div className="min-h-screen bg-white pb-20">
       <div className="relative">
         <img
-          src="https://api.builder.io/api/v1/image/assets/TEMP/64dac7f003ea8759ac412708d9bdc40543b88157?width=860"
-          alt="Silk Blend Tunic"
+          src={product.image}
+          alt={product.name}
           className="w-full h-[480px] object-cover"
         />
         
@@ -86,13 +97,13 @@ export default function ProductDetail() {
       <div className="px-6 pt-6 pb-8 flex flex-col gap-6">
         <div className="flex justify-between items-start">
           <div className="flex flex-col gap-1">
-            <p className="text-[#6A7282] text-sm tracking-[-0.15px]">Tops</p>
+            <p className="text-[#6A7282] text-sm tracking-[-0.15px] capitalize">{product.category}</p>
             <h2 className="text-gray-dark text-base font-normal tracking-[-0.312px]">
-              Silk Blend Tunic
+              {product.name}
             </h2>
           </div>
           <p className="text-brand-pink text-base font-normal tracking-[-0.312px]">
-            $89.50
+            ${product.price.toFixed(2)}
           </p>
         </div>
 
@@ -102,17 +113,17 @@ export default function ProductDetail() {
               <Star
                 key={star}
                 className="w-4 h-4"
-                fill="#FFB900"
+                fill={star <= Math.floor(product.rating) ? "#FFB900" : "none"}
                 stroke="#FFB900"
                 strokeWidth={1.33}
               />
             ))}
           </div>
-          <p className="text-[#6A7282] text-sm tracking-[-0.15px]">(128 reviews)</p>
+          <p className="text-[#6A7282] text-sm tracking-[-0.15px]">({product.reviews} reviews)</p>
         </div>
 
         <p className="text-gray-medium text-base font-normal leading-[26px] tracking-[-0.312px]">
-          Elegant silk blend tunic with delicate details
+          {product.description}
         </p>
 
         <div className="flex flex-col gap-3">
@@ -124,8 +135,8 @@ export default function ProductDetail() {
               {selectedColor}
             </span>
           </div>
-          <div className="flex gap-3">
-            {colors.map((color) => (
+          <div className="flex gap-3 flex-wrap">
+            {product.colors.map((color) => (
               <button
                 key={color}
                 onClick={() => setSelectedColor(color)}
@@ -150,8 +161,8 @@ export default function ProductDetail() {
               Size Guide
             </button>
           </div>
-          <div className="grid grid-cols-5 gap-2">
-            {sizes.map((size) => (
+          <div className={`grid gap-2 ${product.sizes.length > 1 ? 'grid-cols-5' : 'grid-cols-1'}`}>
+            {product.sizes.map((size) => (
               <button
                 key={size}
                 onClick={() => setSelectedSize(size)}

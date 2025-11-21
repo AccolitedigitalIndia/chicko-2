@@ -2,31 +2,17 @@ import { BottomNav } from "@/components/BottomNav";
 import { Link } from "react-router-dom";
 import { Heart, ChevronRight } from "lucide-react";
 import { useFavorites } from "@/context/FavoritesContext";
+import { categories as allCategories, products as allProducts } from "@shared/products";
 
 export default function Index() {
   const { toggleFavorite, isFavorite } = useFavorites();
 
-  const categories = [
-    { name: "New Arrivals", path: "/shop?category=new" },
-    { name: "Dresses", path: "/shop?category=dresses" },
-    { name: "Tops & Tunics", path: "/shop?category=tops" },
-    { name: "Accessories", path: "/shop?category=accessories" },
-  ];
+  const categoryLinks = allCategories.map(cat => ({
+    name: cat.name,
+    path: `/shop?category=${cat.id}`,
+  }));
 
-  const featuredProducts = [
-    {
-      id: 1,
-      name: "Silk Blend Tunic",
-      price: 89.50,
-      image: "https://api.builder.io/api/v1/image/assets/TEMP/e581d93ee8ebe8e7bf849403f2ec4c3a7e861f9e?width=351",
-    },
-    {
-      id: 2,
-      name: "Classic Wrap Dress",
-      price: 119.00,
-      image: "https://api.builder.io/api/v1/image/assets/TEMP/d5251751484e87cc146dd10e45772b823dc28e99?width=351",
-    },
-  ];
+  const featuredProducts = allProducts.slice(0, 2);
 
   return (
     <div className="min-h-screen bg-white pb-20">
@@ -60,7 +46,7 @@ export default function Index() {
           Shop by Category
         </h3>
         <div className="grid grid-cols-2 gap-4">
-          {categories.map((category) => (
+          {categoryLinks.map((category) => (
             <Link
               key={category.name}
               to={category.path}

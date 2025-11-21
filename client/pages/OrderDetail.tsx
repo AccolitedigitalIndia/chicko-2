@@ -1,6 +1,7 @@
 import { BottomNav } from "@/components/BottomNav";
 import { useNavigate, useParams } from "react-router-dom";
 import { ChevronLeft, MapPin, CreditCard } from "lucide-react";
+import { products } from "@shared/products";
 
 export default function OrderDetail() {
   const navigate = useNavigate();
@@ -15,21 +16,21 @@ export default function OrderDetail() {
       items: [
         {
           id: 1,
-          name: "Silk Blend Tunic",
-          color: "Ivory",
+          name: products[0].name,
+          color: products[0].colors[0],
           size: "M",
           quantity: 1,
-          price: 89.50,
-          image: "https://api.builder.io/api/v1/image/assets/TEMP/a8a2c6008052338846cae6bec260590dfa3e5cde?width=192",
+          price: products[0].price,
+          image: products[0].image,
         },
         {
           id: 2,
-          name: "Cotton Summer Dress",
-          color: "Navy",
+          name: products[1].name,
+          color: products[1].colors[1],
           size: "S",
           quantity: 1,
-          price: 90.00,
-          image: "https://api.builder.io/api/v1/image/assets/TEMP/64dac7f003ea8759ac412708d9bdc40543b88157?width=860",
+          price: products[1].price,
+          image: products[1].image,
         },
       ],
       shipping: {
@@ -50,12 +51,12 @@ export default function OrderDetail() {
       items: [
         {
           id: 1,
-          name: "Silk Blend Tunic",
-          color: "Blush",
+          name: products[4].name,
+          color: products[4].colors[0],
           size: "L",
           quantity: 1,
-          price: 89.50,
-          image: "https://api.builder.io/api/v1/image/assets/TEMP/64dac7f003ea8759ac412708d9bdc40543b88157?width=860",
+          price: products[4].price,
+          image: products[4].image,
         },
       ],
       shipping: {
@@ -65,7 +66,7 @@ export default function OrderDetail() {
       },
       payment: {
         method: "Visa ending in 4242",
-        amount: 89.50,
+        amount: 149.00,
       },
     },
     "ORD-2024-003": {
@@ -76,21 +77,21 @@ export default function OrderDetail() {
       items: [
         {
           id: 1,
-          name: "Silk Blend Tunic",
-          color: "Ivory",
-          size: "M",
-          quantity: 2,
-          price: 89.50,
-          image: "https://api.builder.io/api/v1/image/assets/TEMP/a8a2c6008052338846cae6bec260590dfa3e5cde?width=192",
+          name: products[5].name,
+          color: products[5].colors[0],
+          size: products[5].sizes[0],
+          quantity: 1,
+          price: products[5].price,
+          image: products[5].image,
         },
         {
           id: 2,
-          name: "Summer Collection Top",
-          color: "White",
+          name: products[2].name,
+          color: products[2].colors[1],
           size: "M",
           quantity: 1,
-          price: 66.00,
-          image: "https://api.builder.io/api/v1/image/assets/TEMP/64dac7f003ea8759ac412708d9bdc40543b88157?width=860",
+          price: products[2].price,
+          image: products[2].image,
         },
       ],
       shipping: {
@@ -100,7 +101,7 @@ export default function OrderDetail() {
       },
       payment: {
         method: "Visa ending in 4242",
-        amount: 245.00,
+        amount: 264.50,
       },
     },
   };

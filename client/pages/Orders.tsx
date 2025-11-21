@@ -1,6 +1,7 @@
 import { BottomNav } from "@/components/BottomNav";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft, Package } from "lucide-react";
+import { products } from "@shared/products";
 
 interface Order {
   id: string;
@@ -19,25 +20,25 @@ export default function Orders() {
       id: "ORD-2024-001",
       date: "Dec 15, 2024",
       status: "Delivered",
-      total: 179.50,
+      total: 218.50,
       items: 2,
-      image: "https://api.builder.io/api/v1/image/assets/TEMP/a8a2c6008052338846cae6bec260590dfa3e5cde?width=192",
+      image: products[0].image,
     },
     {
       id: "ORD-2024-002",
       date: "Dec 10, 2024",
       status: "In Transit",
-      total: 89.50,
+      total: 149.00,
       items: 1,
-      image: "https://api.builder.io/api/v1/image/assets/TEMP/64dac7f003ea8759ac412708d9bdc40543b88157?width=860",
+      image: products[4].image,
     },
     {
       id: "ORD-2024-003",
       date: "Dec 5, 2024",
       status: "Processing",
-      total: 245.00,
-      items: 3,
-      image: "https://api.builder.io/api/v1/image/assets/TEMP/a8a2c6008052338846cae6bec260590dfa3e5cde?width=192",
+      total: 264.50,
+      items: 2,
+      image: products[5].image,
     },
   ];
 
