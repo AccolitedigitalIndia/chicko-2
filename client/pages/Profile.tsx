@@ -22,7 +22,7 @@ import { useFavorites } from "@/context/FavoritesContext";
 import { useUser } from "@/context/UserContext";
 import { useState } from "react";
 import { toast } from "@/hooks/use-toast";
-import QRCode from "qrcode.react";
+import { QRCodeSVG } from "qrcode.react";
 import { TierComparisonModal } from "@/components/TierComparisonModal";
 
 export default function Profile() {

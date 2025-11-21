@@ -78,7 +78,7 @@ export default function Orders() {
             <div className="w-20 h-24 rounded-[10px] overflow-hidden flex-shrink-0 relative bg-gray-100">
               <OptimizedImage
                 src={order.image}
-                alt={order.productName}
+                alt={`Order ${order.id}`}
                 className="w-full h-full object-cover"
               />
             </div>
