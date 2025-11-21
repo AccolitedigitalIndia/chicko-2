@@ -14,6 +14,8 @@ import { Product } from "@shared/products";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { OptimizedImage } from "@/components/OptimizedImage";
+import { PersonalizedGreeting } from "@/components/PersonalizedGreeting";
+import { WelcomeModal } from "@/components/WelcomeModal";
 
 export default function Index() {
   const [showPromoBanner, setShowPromoBanner] = useState(true);
@@ -97,7 +99,7 @@ export default function Index() {
           </button>
         </div>
       )}
-      <header className="flex justify-center items-center h-28 px-6 bg-gradient-to-b from-brand-pink-light/30 to-white">
+      <header className="relative flex justify-center items-center h-28 px-6 bg-gradient-to-b from-brand-pink-light/30 to-white">
         <h1 className="text-brand-burgundy text-3xl font-semibold tracking-wider flex items-center gap-3">
           <Sparkles
             className="w-8 h-8 stroke-brand-burgundy fill-brand-pink/10"
@@ -105,6 +107,7 @@ export default function Index() {
           />
           LUMIÈRE
         </h1>
+        <PersonalizedGreeting />
       </header>
 
       <section
@@ -224,6 +227,7 @@ export default function Index() {
         product={quickViewProduct}
         onClose={() => setQuickViewProduct(null)}
       />
+      <WelcomeModal />
     </div>
   );
 }
