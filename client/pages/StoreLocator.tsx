@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { ChevronLeft, MapPin, Phone, Clock, Navigation } from "lucide-react";
 import { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import { LeafletStyles } from "@/components/LeafletMap";
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -98,6 +98,7 @@ export default function StoreLocator() {
 
   return (
     <div className="min-h-screen bg-white pb-20">
+      <LeafletStyles />
       <div className="px-6 pt-14 pb-4 border-b border-gray-border flex items-center gap-4">
         <button
           onClick={() => navigate("/profile")}
