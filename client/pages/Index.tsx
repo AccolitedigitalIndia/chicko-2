@@ -13,6 +13,7 @@ import { BackToTop } from "@/components/BackToTop";
 import { Product } from "@shared/products";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
+import { OptimizedImage } from "@/components/OptimizedImage";
 
 export default function Index() {
   const [showPromoBanner, setShowPromoBanner] = useState(true);
