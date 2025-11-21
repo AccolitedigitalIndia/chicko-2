@@ -3,13 +3,24 @@ import { useNavigate } from "react-router-dom";
 import { ChevronLeft, Share2, Heart, Star } from "lucide-react";
 import { useState } from "react";
 import { useCart } from "@/context/CartContext";
+import { useFavorites } from "@/context/FavoritesContext";
 import { toast } from "@/hooks/use-toast";
 
 export default function ProductDetail() {
   const navigate = useNavigate();
   const { addToCart } = useCart();
+  const { toggleFavorite, isFavorite } = useFavorites();
   const [selectedColor, setSelectedColor] = useState("Ivory");
   const [selectedSize, setSelectedSize] = useState("");
+
+  const product = {
+    id: 1,
+    name: "Silk Blend Tunic",
+    price: 89.50,
+    image: "https://api.builder.io/api/v1/image/assets/TEMP/a8a2c6008052338846cae6bec260590dfa3e5cde?width=192",
+  };
+
+  const isFav = isFavorite(product.id);
 
   const colors = ["Ivory", "Blush", "Navy"];
   const sizes = ["XS", "S", "M", "L", "XL"];
@@ -25,10 +36,7 @@ export default function ProductDetail() {
     }
 
     addToCart({
-      id: 1,
-      name: "Silk Blend Tunic",
-      price: 89.50,
-      image: "https://api.builder.io/api/v1/image/assets/TEMP/a8a2c6008052338846cae6bec260590dfa3e5cde?width=192",
+      ...product,
       size: selectedSize,
       color: selectedColor,
     });
@@ -60,8 +68,16 @@ export default function ProductDetail() {
             <button className="w-10 h-10 bg-white/90 rounded-full flex items-center justify-center">
               <Share2 className="w-6 h-6 stroke-gray-dark" strokeWidth={2} />
             </button>
-            <button className="w-10 h-10 bg-white/90 rounded-full flex items-center justify-center">
-              <Heart className="w-6 h-6 stroke-gray-dark" strokeWidth={2} />
+            <button
+              onClick={() => toggleFavorite(product)}
+              className="w-10 h-10 bg-white/90 rounded-full flex items-center justify-center"
+            >
+              <Heart
+                className="w-6 h-6"
+                fill={isFav ? "#EC003F" : "none"}
+                stroke={isFav ? "#EC003F" : "#101828"}
+                strokeWidth={2}
+              />
             </button>
           </div>
         </div>

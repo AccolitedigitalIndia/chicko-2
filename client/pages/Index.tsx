@@ -1,8 +1,11 @@
 import { BottomNav } from "@/components/BottomNav";
 import { Link } from "react-router-dom";
 import { Heart, ChevronRight } from "lucide-react";
+import { useFavorites } from "@/context/FavoritesContext";
 
 export default function Index() {
+  const { toggleFavorite, isFavorite } = useFavorites();
+
   const categories = [
     { name: "New Arrivals", path: "/shop?category=new" },
     { name: "Dresses", path: "/shop?category=dresses" },
@@ -14,13 +17,13 @@ export default function Index() {
     {
       id: 1,
       name: "Silk Blend Tunic",
-      price: "$89.50",
+      price: 89.50,
       image: "https://api.builder.io/api/v1/image/assets/TEMP/e581d93ee8ebe8e7bf849403f2ec4c3a7e861f9e?width=351",
     },
     {
       id: 2,
       name: "Classic Wrap Dress",
-      price: "$119.00",
+      price: 119.00,
       image: "https://api.builder.io/api/v1/image/assets/TEMP/d5251751484e87cc146dd10e45772b823dc28e99?width=351",
     },
   ];
@@ -86,29 +89,40 @@ export default function Index() {
           </Link>
         </div>
         <div className="grid grid-cols-2 gap-4">
-          {featuredProducts.map((product) => (
-            <Link key={product.id} to={`/product/${product.id}`} className="flex flex-col">
-              <div className="relative rounded-[10px] overflow-hidden mb-3">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full aspect-[176/234] object-cover"
-                />
-                <button
-                  onClick={(e) => e.preventDefault()}
-                  className="absolute top-3 right-3 w-9 h-9 bg-white/90 rounded-full flex items-center justify-center"
-                >
-                  <Heart className="w-5 h-5 stroke-gray-medium" strokeWidth={1.67} />
-                </button>
-              </div>
-              <h4 className="text-gray-dark text-base font-normal tracking-[-0.312px] mb-1">
-                {product.name}
-              </h4>
-              <p className="text-brand-pink text-base font-normal tracking-[-0.312px]">
-                {product.price}
-              </p>
-            </Link>
-          ))}
+          {featuredProducts.map((product) => {
+            const isFav = isFavorite(product.id);
+            return (
+              <Link key={product.id} to={`/product/${product.id}`} className="flex flex-col">
+                <div className="relative rounded-[10px] overflow-hidden mb-3">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full aspect-[176/234] object-cover"
+                  />
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      toggleFavorite(product);
+                    }}
+                    className="absolute top-3 right-3 w-9 h-9 bg-white/90 rounded-full flex items-center justify-center"
+                  >
+                    <Heart
+                      className="w-5 h-5"
+                      fill={isFav ? "#EC003F" : "none"}
+                      stroke={isFav ? "#EC003F" : "#4A5565"}
+                      strokeWidth={1.67}
+                    />
+                  </button>
+                </div>
+                <h4 className="text-gray-dark text-base font-normal tracking-[-0.312px] mb-1">
+                  {product.name}
+                </h4>
+                <p className="text-brand-pink text-base font-normal tracking-[-0.312px]">
+                  ${product.price.toFixed(2)}
+                </p>
+              </Link>
+            );
+          })}
         </div>
       </section>
 
