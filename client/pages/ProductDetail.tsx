@@ -25,6 +25,7 @@ import { ProductCard } from "@/components/ProductCard";
 import { QuickViewModal } from "@/components/QuickViewModal";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import useEmblaCarousel from "embla-carousel-react";
+import { OptimizedImage } from "@/components/OptimizedImage";
 
 export default function ProductDetail() {
   const navigate = useNavigate();
