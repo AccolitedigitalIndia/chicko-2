@@ -111,7 +111,10 @@ export default function ProductDetail() {
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
+        <button
+          onClick={() => setShowReviews(true)}
+          className="flex items-center gap-2"
+        >
           <div className="flex gap-0">
             {[1, 2, 3, 4, 5].map((star) => (
               <Star
@@ -123,10 +126,10 @@ export default function ProductDetail() {
               />
             ))}
           </div>
-          <p className="text-[#6A7282] text-sm tracking-[-0.15px]">
+          <p className="text-[#6A7282] text-sm tracking-[-0.15px] underline">
             ({product.reviews} reviews)
           </p>
-        </div>
+        </button>
 
         <p className="text-gray-medium text-base font-normal leading-[26px] tracking-[-0.312px]">
           {product.description}
