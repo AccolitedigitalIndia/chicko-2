@@ -1,4 +1,7 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { storage } from "@/lib/storage";
+
+const CART_STORAGE_KEY = "lumiere-cart";
 
 export interface CartItem {
   id: number;
@@ -28,7 +31,13 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
-  const [items, setItems] = useState<CartItem[]>([]);
+  const [items, setItems] = useState<CartItem[]>(() => {
+    return storage.get<CartItem[]>(CART_STORAGE_KEY, []);
+  });
+
+  useEffect(() => {
+    storage.set(CART_STORAGE_KEY, items);
+  }, [items]);
 
   const addToCart = (newItem: Omit<CartItem, "quantity">) => {
     setItems((prevItems) => {
