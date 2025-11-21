@@ -1,6 +1,13 @@
 import { BottomNav } from "@/components/BottomNav";
 import { useNavigate } from "react-router-dom";
-import { ChevronLeft, Gift, CreditCard, Star, Clock, QrCode } from "lucide-react";
+import {
+  ChevronLeft,
+  Gift,
+  CreditCard,
+  Star,
+  Clock,
+  QrCode,
+} from "lucide-react";
 import { useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import { toast } from "@/hooks/use-toast";
@@ -32,7 +39,8 @@ export default function Wallet() {
       code: "WINTER20",
       expiresAt: "Dec 31, 2024",
       isActive: true,
-      termsAndConditions: "Valid on winter collection only. Cannot be combined with other offers.",
+      termsAndConditions:
+        "Valid on winter collection only. Cannot be combined with other offers.",
     },
     {
       id: "2",
@@ -70,7 +78,8 @@ export default function Wallet() {
 
   const activeRewards = rewards.filter((r) => r.isActive);
   const expiredRewards = rewards.filter((r) => !r.isActive);
-  const displayedRewards = activeTab === "active" ? activeRewards : expiredRewards;
+  const displayedRewards =
+    activeTab === "active" ? activeRewards : expiredRewards;
 
   const getRewardIcon = (type: Reward["type"]) => {
     switch (type) {

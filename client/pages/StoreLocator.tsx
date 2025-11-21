@@ -8,7 +8,8 @@ import { LeafletStyles } from "@/components/LeafletMap";
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
-  iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+  iconRetinaUrl:
+    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
   iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
   shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
 });
@@ -39,7 +40,9 @@ function MapUpdater({ center }: { center: [number, number] }) {
 export default function StoreLocator() {
   const navigate = useNavigate();
   const [selectedStore, setSelectedStore] = useState<Store | null>(null);
-  const [mapCenter, setMapCenter] = useState<[number, number]>([40.7128, -74.006]);
+  const [mapCenter, setMapCenter] = useState<[number, number]>([
+    40.7128, -74.006,
+  ]);
 
   const stores: Store[] = [
     {
@@ -193,7 +196,10 @@ export default function StoreLocator() {
               <div className="flex flex-col gap-2 mb-3 pb-3 border-b border-gray-border">
                 <div className="flex items-center gap-2 text-gray-medium text-sm">
                   <Phone className="w-4 h-4" strokeWidth={2} />
-                  <a href={`tel:${store.phone}`} className="hover:text-brand-pink">
+                  <a
+                    href={`tel:${store.phone}`}
+                    className="hover:text-brand-pink"
+                  >
                     {store.phone}
                   </a>
                 </div>

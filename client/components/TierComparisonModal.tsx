@@ -12,7 +12,10 @@ interface TierBenefit {
   gold: boolean | string;
 }
 
-export function TierComparisonModal({ isOpen, onClose }: TierComparisonModalProps) {
+export function TierComparisonModal({
+  isOpen,
+  onClose,
+}: TierComparisonModalProps) {
   if (!isOpen) return null;
 
   const benefits: TierBenefit[] = [
@@ -131,8 +134,12 @@ export function TierComparisonModal({ isOpen, onClose }: TierComparisonModalProp
                     {benefit.feature}
                   </p>
                 </div>
-                <div className="text-center">{renderBenefit(benefit.bronze)}</div>
-                <div className="text-center">{renderBenefit(benefit.silver)}</div>
+                <div className="text-center">
+                  {renderBenefit(benefit.bronze)}
+                </div>
+                <div className="text-center">
+                  {renderBenefit(benefit.silver)}
+                </div>
                 <div className="text-center">{renderBenefit(benefit.gold)}</div>
               </div>
             ))}
@@ -140,8 +147,9 @@ export function TierComparisonModal({ isOpen, onClose }: TierComparisonModalProp
 
           <div className="mt-6 p-4 bg-brand-pink-light rounded-2xl">
             <p className="text-gray-dark text-sm tracking-[-0.15px] leading-5">
-              💡 <strong>Tip:</strong> Your tier is based on annual spending. Points earned
-              never expire for Gold members and can be redeemed for rewards anytime!
+              💡 <strong>Tip:</strong> Your tier is based on annual spending.
+              Points earned never expire for Gold members and can be redeemed
+              for rewards anytime!
             </p>
           </div>
         </div>

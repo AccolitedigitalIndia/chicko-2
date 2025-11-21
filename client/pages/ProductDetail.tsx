@@ -40,8 +40,12 @@ export default function ProductDetail() {
   );
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-  const [deliveryOption, setDeliveryOption] = useState<"ship" | "pickup">("ship");
-  const [selectedStore, setSelectedStore] = useState<StoreLocation | null>(null);
+  const [deliveryOption, setDeliveryOption] = useState<"ship" | "pickup">(
+    "ship",
+  );
+  const [selectedStore, setSelectedStore] = useState<StoreLocation | null>(
+    null,
+  );
   const [showStorePicker, setShowStorePicker] = useState(false);
 
   const product = getProductById(Number(id));

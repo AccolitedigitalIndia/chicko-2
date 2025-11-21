@@ -1,6 +1,16 @@
 import { BottomNav } from "@/components/BottomNav";
 import { useNavigate } from "react-router-dom";
-import { ChevronLeft, Bell, Gift, Package, Tag, Heart, Settings, Filter, Check } from "lucide-react";
+import {
+  ChevronLeft,
+  Bell,
+  Gift,
+  Package,
+  Tag,
+  Heart,
+  Settings,
+  Filter,
+  Check,
+} from "lucide-react";
 import { useState } from "react";
 import { toast } from "@/hooks/use-toast";
 
@@ -15,7 +25,9 @@ interface Notification {
 
 export default function Notifications() {
   const navigate = useNavigate();
-  const [filter, setFilter] = useState<"all" | "promo" | "order" | "wishlist" | "general">("all");
+  const [filter, setFilter] = useState<
+    "all" | "promo" | "order" | "wishlist" | "general"
+  >("all");
   const [showPreferences, setShowPreferences] = useState(false);
   const [preferences, setPreferences] = useState({
     promos: true,
@@ -71,12 +83,14 @@ export default function Notifications() {
 
   const handleMarkAsRead = (id: string) => {
     setNotificationsList((prev) =>
-      prev.map((notif) => (notif.id === id ? { ...notif, read: true } : notif))
+      prev.map((notif) => (notif.id === id ? { ...notif, read: true } : notif)),
     );
   };
 
   const handleMarkAllAsRead = () => {
-    setNotificationsList((prev) => prev.map((notif) => ({ ...notif, read: true })));
+    setNotificationsList((prev) =>
+      prev.map((notif) => ({ ...notif, read: true })),
+    );
     toast({
       title: "All notifications marked as read",
     });
@@ -134,7 +148,10 @@ export default function Notifications() {
               onClick={() => navigate("/profile")}
               className="w-10 h-10 flex items-center justify-center"
             >
-              <ChevronLeft className="w-6 h-6 stroke-gray-dark" strokeWidth={2} />
+              <ChevronLeft
+                className="w-6 h-6 stroke-gray-dark"
+                strokeWidth={2}
+              />
             </button>
             <div>
               <h2 className="text-gray-dark text-base font-normal tracking-[-0.312px]">
@@ -160,7 +177,10 @@ export default function Notifications() {
               onClick={() => setShowPreferences(true)}
               className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100"
             >
-              <Settings className="w-5 h-5 stroke-gray-medium" strokeWidth={2} />
+              <Settings
+                className="w-5 h-5 stroke-gray-medium"
+                strokeWidth={2}
+              />
             </button>
           </div>
         </div>
@@ -197,7 +217,9 @@ export default function Notifications() {
         {filteredNotifications.map((notification) => (
           <button
             key={notification.id}
-            onClick={() => !notification.read && handleMarkAsRead(notification.id)}
+            onClick={() =>
+              !notification.read && handleMarkAsRead(notification.id)
+            }
             className={`flex gap-4 p-4 rounded-2xl text-left transition-all hover:shadow-sm ${
               notification.read
                 ? "bg-white border border-gray-border"
@@ -269,10 +291,26 @@ export default function Notifications() {
 
             <div className="flex flex-col gap-4">
               {[
-                { key: "promos" as const, label: "Promotional Offers", icon: Gift },
-                { key: "orders" as const, label: "Order Updates", icon: Package },
-                { key: "wishlist" as const, label: "Wishlist Alerts", icon: Heart },
-                { key: "general" as const, label: "General Updates", icon: Bell },
+                {
+                  key: "promos" as const,
+                  label: "Promotional Offers",
+                  icon: Gift,
+                },
+                {
+                  key: "orders" as const,
+                  label: "Order Updates",
+                  icon: Package,
+                },
+                {
+                  key: "wishlist" as const,
+                  label: "Wishlist Alerts",
+                  icon: Heart,
+                },
+                {
+                  key: "general" as const,
+                  label: "General Updates",
+                  icon: Bell,
+                },
               ].map((item) => {
                 const Icon = item.icon;
                 return (
@@ -282,7 +320,10 @@ export default function Notifications() {
                   >
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center">
-                        <Icon className="w-5 h-5 stroke-gray-medium" strokeWidth={2} />
+                        <Icon
+                          className="w-5 h-5 stroke-gray-medium"
+                          strokeWidth={2}
+                        />
                       </div>
                       <span className="text-gray-dark text-sm font-normal tracking-[-0.15px]">
                         {item.label}
@@ -310,7 +351,8 @@ export default function Notifications() {
                 setShowPreferences(false);
                 toast({
                   title: "Preferences saved",
-                  description: "Your notification preferences have been updated",
+                  description:
+                    "Your notification preferences have been updated",
                 });
               }}
               className="w-full mt-6 py-3 bg-brand-pink text-white rounded-full text-sm font-normal tracking-[-0.15px] hover:bg-brand-pink/90 active:scale-95 transition-all"

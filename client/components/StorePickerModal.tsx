@@ -28,9 +28,8 @@ export function StorePickerModal({
 }: StorePickerModalProps) {
   if (!isOpen) return null;
 
-  const [localSelectedStore, setLocalSelectedStore] = useState<StoreLocation | null>(
-    selectedStore || null
-  );
+  const [localSelectedStore, setLocalSelectedStore] =
+    useState<StoreLocation | null>(selectedStore || null);
 
   const stores: StoreLocation[] = [
     {
@@ -99,7 +98,8 @@ export function StorePickerModal({
         <div className="p-6">
           <div className="mb-4">
             <p className="text-gray-medium text-sm tracking-[-0.15px] mb-3">
-              Choose a store for pickup. We'll notify you when your order is ready.
+              Choose a store for pickup. We'll notify you when your order is
+              ready.
             </p>
           </div>
 
@@ -113,8 +113,8 @@ export function StorePickerModal({
                   localSelectedStore?.id === store.id
                     ? "border-brand-pink bg-brand-pink-light"
                     : store.pickupAvailable
-                    ? "border-gray-border hover:border-gray-300"
-                    : "border-gray-border opacity-50 cursor-not-allowed"
+                      ? "border-gray-border hover:border-gray-300"
+                      : "border-gray-border opacity-50 cursor-not-allowed"
                 }`}
               >
                 <div className="flex justify-between items-start mb-2">
@@ -131,7 +131,10 @@ export function StorePickerModal({
                       )}
                     </div>
                     <div className="flex items-start gap-1 text-[#6A7282] text-sm tracking-[-0.15px]">
-                      <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" strokeWidth={2} />
+                      <MapPin
+                        className="w-4 h-4 mt-0.5 flex-shrink-0"
+                        strokeWidth={2}
+                      />
                       <div>
                         <p>{store.address}</p>
                         <p>

@@ -41,8 +41,11 @@ export default function Profile() {
   const nextTier = null;
   const annualSpend = 1250;
   const nextTierThreshold = 1000;
-  const progressToNextTier = nextTier ? Math.min((annualSpend / nextTierThreshold) * 100, 100) : 100;
-  const loyaltyId = "LOYAL" + user.name.replace(/\s/g, "").toUpperCase().slice(0, 6) + "2024";
+  const progressToNextTier = nextTier
+    ? Math.min((annualSpend / nextTierThreshold) * 100, 100)
+    : 100;
+  const loyaltyId =
+    "LOYAL" + user.name.replace(/\s/g, "").toUpperCase().slice(0, 6) + "2024";
 
   const handleShareReferral = () => {
     const referralLink = `https://store.app/ref/${loyaltyId}`;
@@ -115,7 +118,8 @@ export default function Profile() {
                       setIsEditingName(false);
                       toast({
                         title: "Name updated",
-                        description: "Your profile has been updated successfully.",
+                        description:
+                          "Your profile has been updated successfully.",
                       });
                     }
                   }}
@@ -164,7 +168,8 @@ export default function Profile() {
                       setIsEditingEmail(false);
                       toast({
                         title: "Email updated",
-                        description: "Your email has been updated successfully.",
+                        description:
+                          "Your email has been updated successfully.",
                       });
                     }
                   }}
