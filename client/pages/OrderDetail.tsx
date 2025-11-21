@@ -161,12 +161,12 @@ export default function OrderDetail() {
       items: [
         {
           id: 1,
-          name: products[5].name,
-          color: products[5].colors[0],
-          size: products[5].sizes[0],
+          name: products[3].name,
+          color: products[3].colors[0],
+          size: products[3].sizes[0],
           quantity: 1,
-          price: products[5].price,
-          image: products[5].image,
+          price: products[3].price,
+          image: products[3].image,
         },
         {
           id: 2,

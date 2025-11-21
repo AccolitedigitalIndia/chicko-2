@@ -36,9 +36,9 @@ export default function Orders() {
       id: "ORD-2024-003",
       date: "Dec 5, 2024",
       status: "Processing",
-      total: 264.5,
+      total: 174.5,
       items: 2,
-      image: products[5].image,
+      image: products[3].image,
     },
   ];
 
