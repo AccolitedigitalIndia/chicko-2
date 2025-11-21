@@ -2,7 +2,7 @@ import { BottomNav } from "@/components/BottomNav";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft, Gift, CreditCard, Star, Clock, QrCode } from "lucide-react";
 import { useState } from "react";
-import QRCode from "qrcode.react";
+import { QRCodeSVG } from "qrcode.react";
 import { toast } from "@/hooks/use-toast";
 
 interface Reward {
@@ -245,7 +245,7 @@ export default function Wallet() {
 
             <div className="flex justify-center mb-6">
               <div className="p-4 bg-white border-2 border-gray-border rounded-2xl">
-                <QRCode value={selectedReward.code} size={200} />
+                <QRCodeSVG value={selectedReward.code} size={200} />
               </div>
             </div>
 
