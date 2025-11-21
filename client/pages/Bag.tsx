@@ -4,6 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 import { EmptyState } from "@/components/EmptyState";
 import { BackToTop } from "@/components/BackToTop";
+import { OptimizedImage } from "@/components/OptimizedImage";
 
 export default function Bag() {
   const navigate = useNavigate();
@@ -72,9 +73,9 @@ export default function Bag() {
               >
                 <Link
                   to={`/product/${item.id}`}
-                  className="w-24 h-32 rounded-[10px] overflow-hidden flex-shrink-0 bg-gray-100"
+                  className="w-24 h-32 rounded-[10px] overflow-hidden flex-shrink-0 bg-gray-100 relative"
                 >
-                  <img
+                  <OptimizedImage
                     src={item.image}
                     alt={item.name}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
