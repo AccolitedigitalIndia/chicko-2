@@ -16,10 +16,6 @@ export const PersonalizedGreeting = () => {
     return () => clearInterval(interval);
   }, [user.name]);
 
-  if (!user.name) {
-    return null;
-  }
-
   return (
     <div className="absolute right-6 top-1/2 -translate-y-1/2 animate-in fade-in slide-in-from-right-4 duration-500">
       <p className="text-brand-burgundy/70 text-sm font-normal tracking-wide">
