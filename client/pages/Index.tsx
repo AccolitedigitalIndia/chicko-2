@@ -21,7 +21,7 @@ export default function Index() {
     <div className="min-h-screen bg-white pb-20">
       <header className="flex justify-center items-center h-24 px-6">
         <h1 className="text-brand-burgundy text-base font-normal tracking-[0.488px]">
-          CHIC & CO
+          LUMIÈRE
         </h1>
       </header>
 
@@ -38,9 +38,9 @@ export default function Index() {
           <p className="text-white/90 text-base font-normal tracking-[-0.312px]">
             Effortless Elegance
           </p>
-          <button className="bg-white text-brand-burgundy px-8 py-3 rounded-full text-base font-normal tracking-[-0.312px] mt-2">
+          <Link to="/shop" className="bg-white text-brand-burgundy px-8 py-3 rounded-full text-base font-normal tracking-[-0.312px] mt-2">
             Shop Now
-          </button>
+          </Link>
         </div>
       </section>
 
