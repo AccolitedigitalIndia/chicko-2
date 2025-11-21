@@ -1,7 +1,9 @@
 import { BottomNav } from "@/components/BottomNav";
 import { useCart } from "@/context/CartContext";
-import { useNavigate } from "react-router-dom";
-import { Minus, Plus, Trash2 } from "lucide-react";
+import { useNavigate, Link } from "react-router-dom";
+import { Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
+import { EmptyState } from "@/components/EmptyState";
+import { BackToTop } from "@/components/BackToTop";
 
 export default function Bag() {
   const navigate = useNavigate();
@@ -9,9 +11,11 @@ export default function Bag() {
     useCart();
 
   const subtotal = getSubtotal();
-  const shipping = 7.5;
+  const shipping = subtotal > 75 ? 0 : 7.5;
   const tax = subtotal * 0.08;
   const total = subtotal + shipping + tax;
+  const freeShippingThreshold = 75;
+  const remainingForFreeShipping = freeShippingThreshold - subtotal;
 
   return (
     <div className="min-h-screen bg-white pb-20">
@@ -24,42 +28,75 @@ export default function Bag() {
         </p>
       </div>
 
+      {items.length > 0 && remainingForFreeShipping > 0 && (
+        <div className="mx-6 mt-4 px-4 py-3 bg-brand-pink-light border border-brand-pink/20 rounded-lg">
+          <p className="text-sm text-brand-burgundy">
+            Add{" "}
+            <span className="font-medium">
+              ${remainingForFreeShipping.toFixed(2)}
+            </span>{" "}
+            more for free shipping!
+          </p>
+          <div className="mt-2 h-2 bg-white rounded-full overflow-hidden">
+            <div
+              className="h-full bg-brand-pink transition-all duration-300"
+              style={{
+                width: `${Math.min((subtotal / freeShippingThreshold) * 100, 100)}%`,
+              }}
+            />
+          </div>
+        </div>
+      )}
+
       <div className="px-6 py-4">
         {items.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-16">
-            <p className="text-gray-medium text-base mb-2">Your bag is empty</p>
-            <p className="text-[#6A7282] text-sm text-center">
-              Add items to get started
-            </p>
-          </div>
+          <EmptyState
+            icon={ShoppingBag}
+            title="Your bag is empty"
+            description="Add items to get started on your shopping journey"
+            action={
+              <Link
+                to="/shop"
+                className="px-6 py-3 bg-brand-pink text-white rounded-full text-sm hover:bg-brand-burgundy transition-colors"
+              >
+                Continue Shopping
+              </Link>
+            }
+          />
         ) : (
           <div className="flex flex-col gap-4">
             {items.map((item) => (
               <div
                 key={`${item.id}-${item.size}-${item.color}`}
-                className="flex gap-4"
+                className="flex gap-4 group"
               >
-                <div className="w-24 h-32 rounded-[10px] overflow-hidden flex-shrink-0">
+                <Link
+                  to={`/product/${item.id}`}
+                  className="w-24 h-32 rounded-[10px] overflow-hidden flex-shrink-0 bg-gray-100"
+                >
                   <img
                     src={item.image}
                     alt={item.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
-                </div>
+                </Link>
 
                 <div className="flex-1 flex flex-col gap-1">
                   <div className="flex justify-between items-start">
-                    <h3 className="text-gray-dark text-base font-normal tracking-[-0.312px]">
-                      {item.name}
-                    </h3>
+                    <Link to={`/product/${item.id}`}>
+                      <h3 className="text-gray-dark text-base font-normal tracking-[-0.312px] hover:text-brand-pink transition-colors">
+                        {item.name}
+                      </h3>
+                    </Link>
                     <button
                       onClick={() =>
                         removeFromCart(item.id, item.size, item.color)
                       }
-                      className="w-5 h-6 flex items-center justify-center"
+                      className="w-8 h-8 flex items-center justify-center hover:bg-red-50 rounded-full transition-colors group/delete"
+                      aria-label="Remove item"
                     >
                       <Trash2
-                        className="w-5 h-5 stroke-gray-light"
+                        className="w-5 h-5 stroke-gray-light group-hover/delete:stroke-red-500 transition-colors"
                         strokeWidth={1.67}
                       />
                     </button>
@@ -80,7 +117,8 @@ export default function Bag() {
                             item.quantity - 1,
                           )
                         }
-                        className="w-4 h-4 flex items-center justify-center"
+                        className="w-5 h-5 flex items-center justify-center hover:bg-white rounded-full transition-all active:scale-90"
+                        aria-label="Decrease quantity"
                       >
                         <Minus
                           className="w-4 h-4 stroke-gray-medium"
@@ -99,7 +137,8 @@ export default function Bag() {
                             item.quantity + 1,
                           )
                         }
-                        className="w-4 h-4 flex items-center justify-center"
+                        className="w-5 h-5 flex items-center justify-center hover:bg-white rounded-full transition-all active:scale-90"
+                        aria-label="Increase quantity"
                       >
                         <Plus
                           className="w-4 h-4 stroke-gray-medium"
@@ -139,7 +178,11 @@ export default function Bag() {
                 Shipping
               </span>
               <span className="text-gray-medium text-base font-normal tracking-[-0.312px]">
-                ${shipping.toFixed(2)}
+                {shipping === 0 ? (
+                  <span className="text-green-600 font-medium">FREE</span>
+                ) : (
+                  `$${shipping.toFixed(2)}`
+                )}
               </span>
             </div>
 
@@ -153,10 +196,10 @@ export default function Bag() {
             </div>
 
             <div className="flex justify-between items-center pt-3 border-t border-gray-border">
-              <span className="text-gray-dark text-base font-normal tracking-[-0.312px]">
+              <span className="text-gray-dark text-lg font-medium tracking-[-0.312px]">
                 Total
               </span>
-              <span className="text-gray-dark text-base font-normal tracking-[-0.312px]">
+              <span className="text-gray-dark text-lg font-medium tracking-[-0.312px]">
                 ${total.toFixed(2)}
               </span>
             </div>
@@ -164,7 +207,7 @@ export default function Bag() {
 
           <button
             onClick={() => navigate("/checkout")}
-            className="w-full py-4 bg-brand-pink text-white rounded-full text-base font-normal tracking-[-0.312px]"
+            className="w-full py-4 bg-brand-pink text-white rounded-full text-base font-normal tracking-[-0.312px] hover:bg-brand-burgundy transition-all active:scale-98"
           >
             Proceed to Checkout
           </button>
@@ -172,6 +215,7 @@ export default function Bag() {
       )}
 
       <BottomNav />
+      <BackToTop />
     </div>
   );
 }

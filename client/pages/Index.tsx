@@ -1,17 +1,29 @@
 import { BottomNav } from "@/components/BottomNav";
 import { Link } from "react-router-dom";
-import { Heart, ChevronRight, Sparkles } from "lucide-react";
-import { useFavorites } from "@/context/FavoritesContext";
+import { ChevronRight, Sparkles, ShoppingBag } from "lucide-react";
 import {
   categories as allCategories,
   products as allProducts,
 } from "@shared/products";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { ProductCard } from "@/components/ProductCard";
+import { QuickViewModal } from "@/components/QuickViewModal";
+import { Newsletter } from "@/components/Newsletter";
+import { BackToTop } from "@/components/BackToTop";
+import { Product } from "@shared/products";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
 
 export default function Index() {
-  const { toggleFavorite, isFavorite } = useFavorites();
-  const [currentSlide, setCurrentSlide] = useState(0);
   const [showPromoBanner, setShowPromoBanner] = useState(true);
+  const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(
+    null,
+  );
+  const [isPaused, setIsPaused] = useState(false);
+
+  const autoplay = Autoplay({ delay: 4000, stopOnInteraction: true });
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [autoplay]);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   const heroImages = [
     {
@@ -32,11 +44,34 @@ export default function Index() {
   ];
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroImages.length);
-    }, 4000);
-    return () => clearInterval(timer);
-  }, []);
+    if (!emblaApi) return;
+
+    const onSelect = () => {
+      setCurrentSlide(emblaApi.selectedScrollSnap());
+    };
+
+    emblaApi.on("select", onSelect);
+    onSelect();
+
+    return () => {
+      emblaApi.off("select", onSelect);
+    };
+  }, [emblaApi]);
+
+  const scrollTo = useCallback(
+    (index: number) => emblaApi && emblaApi.scrollTo(index),
+    [emblaApi],
+  );
+
+  const handleMouseEnter = () => {
+    autoplay.stop();
+    setIsPaused(true);
+  };
+
+  const handleMouseLeave = () => {
+    autoplay.play();
+    setIsPaused(false);
+  };
 
   const categoryLinks = allCategories.map((cat) => ({
     name: cat.name,
@@ -71,44 +106,50 @@ export default function Index() {
         </h1>
       </header>
 
-      <section className="relative w-full h-[400px] overflow-hidden">
-        {heroImages.map((slide, index) => (
-          <div
-            key={index}
-            className={`absolute inset-0 transition-opacity duration-1000 ${
-              index === currentSlide ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            <img
-              src={slide.url}
-              alt={slide.title}
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end items-center pb-10 gap-2">
-              <h2 className="text-white text-base font-normal tracking-[-0.312px]">
-                {slide.title}
-              </h2>
-              <p className="text-white/90 text-base font-normal tracking-[-0.312px]">
-                {slide.subtitle}
-              </p>
-              <Link
-                to="/shop"
-                className="bg-white text-brand-burgundy px-8 py-3 rounded-full text-base font-normal tracking-[-0.312px] mt-2"
-              >
-                Shop Now
-              </Link>
-            </div>
+      <section
+        className="relative w-full h-[400px] overflow-hidden"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        <div className="overflow-hidden" ref={emblaRef}>
+          <div className="flex">
+            {heroImages.map((slide, index) => (
+              <div key={index} className="flex-[0_0_100%] min-w-0 relative">
+                <img
+                  src={slide.url}
+                  alt={slide.title}
+                  className="w-full h-[400px] object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end items-center pb-10 gap-2">
+                  <h2 className="text-white text-base font-normal tracking-[-0.312px] animate-in fade-in slide-in-from-bottom-4 duration-700">
+                    {slide.title}
+                  </h2>
+                  <p className="text-white/90 text-base font-normal tracking-[-0.312px] animate-in fade-in slide-in-from-bottom-4 duration-700 delay-100">
+                    {slide.subtitle}
+                  </p>
+                  <Link
+                    to="/shop"
+                    className="bg-white text-brand-burgundy px-8 py-3 rounded-full text-base font-normal tracking-[-0.312px] mt-2 hover:bg-brand-pink-light transition-all hover:scale-105 active:scale-95 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200"
+                  >
+                    Shop Now
+                  </Link>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
 
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
           {heroImages.map((_, index) => (
             <button
               key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`w-2 h-2 rounded-full transition-all ${
-                index === currentSlide ? "bg-white w-6" : "bg-white/50"
+              onClick={() => scrollTo(index)}
+              className={`rounded-full transition-all hover:bg-white/80 ${
+                index === currentSlide
+                  ? "bg-white w-6 h-2"
+                  : "bg-white/50 w-2 h-2"
               }`}
+              aria-label={`Go to slide ${index + 1}`}
             />
           ))}
         </div>
@@ -128,17 +169,17 @@ export default function Index() {
               <img
                 src={category.image}
                 alt={category.name}
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent transition-opacity group-hover:from-black/80" />
               <div className="absolute inset-0 flex flex-col justify-end p-4">
-                <span className="text-white text-base font-normal tracking-[-0.312px] mb-1">
+                <span className="text-white text-base font-normal tracking-[-0.312px] mb-1 transition-transform group-hover:translate-x-1">
                   {category.name}
                 </span>
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1 transition-transform group-hover:translate-x-1">
                   <span className="text-white/80 text-xs">Explore</span>
                   <ChevronRight
-                    className="w-4 h-4 stroke-white/80"
+                    className="w-4 h-4 stroke-white/80 transition-transform group-hover:translate-x-1"
                     strokeWidth={1.67}
                   />
                 </div>
@@ -155,55 +196,33 @@ export default function Index() {
           </h3>
           <Link
             to="/shop"
-            className="flex items-center gap-1 text-brand-pink text-sm font-normal tracking-[-0.15px]"
+            className="flex items-center gap-1 text-brand-pink text-sm font-normal tracking-[-0.15px] hover:text-brand-burgundy transition-colors"
           >
             View All
             <ChevronRight className="w-4 h-4" strokeWidth={1.33} />
           </Link>
         </div>
         <div className="grid grid-cols-2 gap-4">
-          {featuredProducts.map((product) => {
-            const isFav = isFavorite(product.id);
-            return (
-              <Link
-                key={product.id}
-                to={`/product/${product.id}`}
-                className="flex flex-col"
-              >
-                <div className="relative rounded-[10px] overflow-hidden mb-3">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full aspect-[176/234] object-cover"
-                  />
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      toggleFavorite(product);
-                    }}
-                    className="absolute top-3 right-3 w-9 h-9 bg-white/90 rounded-full flex items-center justify-center"
-                  >
-                    <Heart
-                      className="w-5 h-5"
-                      fill={isFav ? "#EC003F" : "none"}
-                      stroke={isFav ? "#EC003F" : "#4A5565"}
-                      strokeWidth={1.67}
-                    />
-                  </button>
-                </div>
-                <h4 className="text-gray-dark text-base font-normal tracking-[-0.312px] mb-1">
-                  {product.name}
-                </h4>
-                <p className="text-brand-pink text-base font-normal tracking-[-0.312px]">
-                  ${product.price.toFixed(2)}
-                </p>
-              </Link>
-            );
-          })}
+          {featuredProducts.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              onQuickView={setQuickViewProduct}
+            />
+          ))}
         </div>
       </section>
 
+      <section className="px-6 pt-8">
+        <Newsletter />
+      </section>
+
       <BottomNav />
+      <BackToTop />
+      <QuickViewModal
+        product={quickViewProduct}
+        onClose={() => setQuickViewProduct(null)}
+      />
     </div>
   );
 }
