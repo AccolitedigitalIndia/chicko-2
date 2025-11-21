@@ -116,7 +116,7 @@ export default function Index() {
           <div className="flex">
             {heroImages.map((slide, index) => (
               <div key={index} className="flex-[0_0_100%] min-w-0 relative">
-                <img
+                <OptimizedImage
                   src={slide.url}
                   alt={slide.title}
                   className="w-full h-[400px] object-cover"
@@ -167,7 +167,7 @@ export default function Index() {
               to={`/shop?category=${category.id}`}
               className="relative rounded-2xl overflow-hidden h-40 group"
             >
-              <img
+              <OptimizedImage
                 src={category.image}
                 alt={category.name}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
