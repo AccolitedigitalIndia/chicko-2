@@ -2,14 +2,42 @@ import { BottomNav } from "@/components/BottomNav";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft, Share2, Heart, Star } from "lucide-react";
 import { useState } from "react";
+import { useCart } from "@/context/CartContext";
+import { toast } from "@/hooks/use-toast";
 
 export default function ProductDetail() {
   const navigate = useNavigate();
+  const { addToCart } = useCart();
   const [selectedColor, setSelectedColor] = useState("Ivory");
   const [selectedSize, setSelectedSize] = useState("");
 
   const colors = ["Ivory", "Blush", "Navy"];
   const sizes = ["XS", "S", "M", "L", "XL"];
+
+  const handleAddToBag = () => {
+    if (!selectedSize) {
+      toast({
+        title: "Size required",
+        description: "Please select a size before adding to bag",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    addToCart({
+      id: 1,
+      name: "Silk Blend Tunic",
+      price: 89.50,
+      image: "https://api.builder.io/api/v1/image/assets/TEMP/a8a2c6008052338846cae6bec260590dfa3e5cde?width=192",
+      size: selectedSize,
+      color: selectedColor,
+    });
+
+    toast({
+      title: "Added to bag",
+      description: `${selectedColor} Silk Blend Tunic (${selectedSize}) added to your bag`,
+    });
+  };
 
   return (
     <div className="min-h-screen bg-white pb-20">
@@ -123,7 +151,10 @@ export default function ProductDetail() {
           </div>
         </div>
 
-        <button className="w-full py-4 bg-brand-pink text-white rounded-full text-base font-normal tracking-[-0.312px]">
+        <button
+          onClick={handleAddToBag}
+          className="w-full py-4 bg-brand-pink text-white rounded-full text-base font-normal tracking-[-0.312px]"
+        >
           Add to Bag
         </button>
       </div>
