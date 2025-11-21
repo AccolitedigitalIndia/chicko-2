@@ -1,4 +1,10 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
 import { storage } from "@/lib/storage";
 
 const FAVORITES_STORAGE_KEY = "lumiere-favorites";
