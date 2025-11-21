@@ -11,6 +11,7 @@ import { BackToTop } from "@/components/BackToTop";
 import { EmptyState } from "@/components/EmptyState";
 import { Package } from "lucide-react";
 import { useDebounce } from "@/hooks/use-debounce";
+import { PersonalizedGreeting } from "@/components/PersonalizedGreeting";
 
 export default function Shop() {
   const [searchParams] = useSearchParams();
@@ -126,9 +127,14 @@ export default function Shop() {
   return (
     <div className="min-h-screen bg-white pb-20">
       <div className="px-6 pt-14 pb-8 flex flex-col gap-4">
-        <h2 className="text-gray-dark text-base font-normal tracking-[-0.312px]">
-          Shop
-        </h2>
+        <div className="relative flex items-center justify-between">
+          <h2 className="text-gray-dark text-base font-normal tracking-[-0.312px]">
+            Shop
+          </h2>
+          <div className="absolute -top-8 right-0">
+            <PersonalizedGreeting />
+          </div>
+        </div>
 
         <div className="relative">
           <Search
