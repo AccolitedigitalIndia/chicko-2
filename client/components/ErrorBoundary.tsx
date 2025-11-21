@@ -58,7 +58,8 @@ export class ErrorBoundary extends Component<Props, State> {
               Something went wrong
             </h1>
             <p className="text-gray-medium text-sm mb-6">
-              We're sorry for the inconvenience. The app encountered an unexpected error.
+              We're sorry for the inconvenience. The app encountered an
+              unexpected error.
             </p>
             {process.env.NODE_ENV === "development" && this.state.error && (
               <div className="bg-gray-100 rounded-lg p-4 mb-6 text-left overflow-auto max-h-48">
