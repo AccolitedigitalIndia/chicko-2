@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Heart, Eye } from "lucide-react";
 import { Product } from "@shared/products";
 import { useFavorites } from "@/context/FavoritesContext";
-import { useState } from "react";
+import { OptimizedImage } from "@/components/OptimizedImage";
 
 interface ProductCardProps {
   product: Product;
@@ -12,7 +12,6 @@ interface ProductCardProps {
 export function ProductCard({ product, onQuickView }: ProductCardProps) {
   const { toggleFavorite, isFavorite } = useFavorites();
   const isFav = isFavorite(product.id);
-  const [imageLoaded, setImageLoaded] = useState(false);
   const displayPrice =
     product.onSale && product.salePrice ? product.salePrice : product.price;
   const hasDiscount = product.onSale && product.salePrice;
@@ -23,16 +22,10 @@ export function ProductCard({ product, onQuickView }: ProductCardProps) {
         to={`/product/${product.id}`}
         className="relative rounded-[10px] overflow-hidden mb-3 bg-gray-100"
       >
-        {!imageLoaded && (
-          <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 animate-pulse" />
-        )}
-        <img
+        <OptimizedImage
           src={product.image}
           alt={product.name}
-          className={`w-full aspect-[183/244] object-cover transition-all duration-300 ${
-            imageLoaded ? "opacity-100 group-hover:scale-105" : "opacity-0"
-          }`}
-          onLoad={() => setImageLoaded(true)}
+          className="w-full aspect-[183/244] object-cover transition-all duration-300 group-hover:scale-105"
           loading="lazy"
         />
 
