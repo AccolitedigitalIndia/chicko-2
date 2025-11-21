@@ -1,6 +1,6 @@
 import { BottomNav } from "@/components/BottomNav";
 import { Link } from "react-router-dom";
-import { Heart, ChevronRight } from "lucide-react";
+import { Heart, ChevronRight, Sparkles } from "lucide-react";
 import { useFavorites } from "@/context/FavoritesContext";
 import {
   categories as allCategories,
@@ -47,7 +47,8 @@ export default function Index() {
   return (
     <div className="min-h-screen bg-white pb-20">
       <header className="flex justify-center items-center h-24 px-6">
-        <h1 className="text-brand-burgundy text-base font-normal tracking-[0.488px]">
+        <h1 className="text-brand-burgundy text-base font-normal tracking-[0.488px] flex items-center gap-2">
+          <Sparkles className="w-5 h-5 stroke-brand-burgundy" strokeWidth={2} />
           LUMIÈRE
         </h1>
       </header>
