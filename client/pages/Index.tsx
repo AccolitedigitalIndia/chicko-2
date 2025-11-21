@@ -6,9 +6,36 @@ import {
   categories as allCategories,
   products as allProducts,
 } from "@shared/products";
+import { useState, useEffect } from "react";
 
 export default function Index() {
   const { toggleFavorite, isFavorite } = useFavorites();
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const heroImages = [
+    {
+      url: "https://api.builder.io/api/v1/image/assets/TEMP/8edbb79545dad257d30674c6aa5c67c383280142?width=830",
+      title: "WINTER COLLECTION",
+      subtitle: "Effortless Elegance",
+    },
+    {
+      url: "https://api.builder.io/api/v1/image/assets/TEMP/64dac7f003ea8759ac412708d9bdc40543b88157?width=860",
+      title: "NEW ARRIVALS",
+      subtitle: "Discover Fresh Styles",
+    },
+    {
+      url: "https://api.builder.io/api/v1/image/assets/TEMP/2ddc134b0c58a62bf03b2ecd3b5e270e5274f2e9?width=366",
+      title: "EXCLUSIVE DESIGNS",
+      subtitle: "Limited Edition",
+    },
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroImages.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
 
   const categoryLinks = allCategories.map((cat) => ({
     name: cat.name,
@@ -72,19 +99,27 @@ export default function Index() {
           Shop by Category
         </h3>
         <div className="grid grid-cols-2 gap-4">
-          {categoryLinks.map((category) => (
+          {allCategories.map((category) => (
             <Link
               key={category.name}
-              to={category.path}
-              className="flex flex-col justify-center items-center bg-brand-pink-light rounded-[10px] p-6 gap-1 min-h-[96px]"
+              to={`/shop?category=${category.id}`}
+              className="relative rounded-2xl overflow-hidden h-40 group"
             >
-              <span className="text-brand-burgundy text-base font-normal tracking-[-0.312px] text-center">
-                {category.name}
-              </span>
-              <ChevronRight
-                className="w-5 h-5 stroke-brand-pink"
-                strokeWidth={1.67}
+              <img
+                src={category.image}
+                alt={category.name}
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              <div className="absolute inset-0 flex flex-col justify-end p-4">
+                <span className="text-white text-base font-normal tracking-[-0.312px] mb-1">
+                  {category.name}
+                </span>
+                <div className="flex items-center gap-1">
+                  <span className="text-white/80 text-xs">Explore</span>
+                  <ChevronRight className="w-4 h-4 stroke-white/80" strokeWidth={1.67} />
+                </div>
+              </div>
             </Link>
           ))}
         </div>
