@@ -338,7 +338,7 @@ export default function Profile() {
 
             <div className="flex justify-center mb-6">
               <div className="p-4 bg-white border-2 border-gray-border rounded-2xl">
-                <QRCode value={loyaltyId} size={200} />
+                <QRCodeSVG value={loyaltyId} size={200} />
               </div>
             </div>
 
