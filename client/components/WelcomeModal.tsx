@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useUser } from "@/context/UserContext";
-import { X, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 
 export const WelcomeModal = () => {
   const { user, updateUserName, isNewUser } = useUser();
@@ -22,22 +22,11 @@ export const WelcomeModal = () => {
     }
   };
 
-  const handleSkip = () => {
-    setIsOpen(false);
-  };
-
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-black/50 z-[100] flex items-center justify-center p-4 animate-in fade-in duration-300">
       <div className="bg-white rounded-3xl max-w-md w-full p-8 relative animate-in zoom-in-95 slide-in-from-bottom-4 duration-500">
-        <button
-          onClick={handleSkip}
-          className="absolute top-4 right-4 w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center transition-colors"
-          aria-label="Close"
-        >
-          <X className="w-5 h-5 stroke-gray-medium" />
-        </button>
 
         <div className="flex flex-col items-center text-center mb-6">
           <div className="w-16 h-16 bg-brand-pink-light rounded-full flex items-center justify-center mb-4">
@@ -68,22 +57,13 @@ export const WelcomeModal = () => {
             />
           </div>
 
-          <div className="flex flex-col gap-2">
-            <button
-              type="submit"
-              disabled={!name.trim()}
-              className="w-full px-6 py-3 bg-brand-pink text-white rounded-full text-base font-medium hover:bg-brand-burgundy transition-all disabled:opacity-50 disabled:cursor-not-allowed active:scale-98"
-            >
-              Continue
-            </button>
-            <button
-              type="button"
-              onClick={handleSkip}
-              className="w-full px-6 py-3 text-gray-medium text-sm hover:text-gray-dark transition-colors"
-            >
-              Skip for now
-            </button>
-          </div>
+          <button
+            type="submit"
+            disabled={!name.trim()}
+            className="w-full px-6 py-3 bg-brand-pink text-white rounded-full text-base font-medium hover:bg-brand-burgundy transition-all disabled:opacity-50 disabled:cursor-not-allowed active:scale-98"
+          >
+            Continue
+          </button>
         </form>
       </div>
     </div>
