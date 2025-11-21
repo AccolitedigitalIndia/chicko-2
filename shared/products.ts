@@ -28,25 +28,25 @@ export const categories: Category[] = [
     id: "tops",
     name: "Tops",
     image:
-      "https://images.pexels.com/photos/1980103/pexels-photo-1980103.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://images.pexels.com/photos/4355793/pexels-photo-4355793.jpeg?auto=compress&cs=tinysrgb&w=1200",
   },
   {
     id: "dresses",
     name: "Dresses",
     image:
-      "https://images.pexels.com/photos/19198599/pexels-photo-19198599.png?auto=compress&cs=tinysrgb&w=600",
+      "https://images.pexels.com/photos/34812886/pexels-photo-34812886.jpeg?auto=compress&cs=tinysrgb&w=1200",
   },
   {
     id: "bottoms",
     name: "Bottoms",
     image:
-      "https://images.pexels.com/photos/514914/pexels-photo-514914.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://images.pexels.com/photos/6467707/pexels-photo-6467707.jpeg?auto=compress&cs=tinysrgb&w=1200",
   },
   {
     id: "accessories",
     name: "Accessories",
     image:
-      "https://images.pexels.com/photos/27127411/pexels-photo-27127411.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://images.pexels.com/photos/8365688/pexels-photo-8365688.jpeg?auto=compress&cs=tinysrgb&w=1200",
   },
 ];
 
