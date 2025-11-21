@@ -26,6 +26,7 @@ import { QuickViewModal } from "@/components/QuickViewModal";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import useEmblaCarousel from "embla-carousel-react";
 import { OptimizedImage } from "@/components/OptimizedImage";
+import { StorePickerModal, StoreLocation } from "@/components/StorePickerModal";
 
 export default function ProductDetail() {
   const navigate = useNavigate();
@@ -39,6 +40,9 @@ export default function ProductDetail() {
   );
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [deliveryOption, setDeliveryOption] = useState<"ship" | "pickup">("ship");
+  const [selectedStore, setSelectedStore] = useState<StoreLocation | null>(null);
+  const [showStorePicker, setShowStorePicker] = useState(false);
 
   const product = getProductById(Number(id));
 
