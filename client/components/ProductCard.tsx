@@ -64,14 +64,15 @@ export function ProductCard({ product, onQuickView }: ProductCardProps) {
               e.preventDefault();
               toggleFavorite(product);
             }}
-            className="w-9 h-9 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center transition-transform hover:scale-110 active:scale-95"
-            aria-label={isFav ? "Remove from favorites" : "Add to favorites"}
+            className="w-9 h-9 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center transition-transform hover:scale-110 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-pink focus-visible:ring-offset-2"
+            aria-label={isFav ? `Remove ${product.name} from favorites` : `Add ${product.name} to favorites`}
           >
             <Heart
               className="w-5 h-5 transition-all"
               fill={isFav ? "#EC003F" : "none"}
               stroke={isFav ? "#EC003F" : "#4A5565"}
               strokeWidth={1.67}
+              aria-hidden="true"
             />
           </button>
           {onQuickView && (
@@ -80,10 +81,10 @@ export function ProductCard({ product, onQuickView }: ProductCardProps) {
                 e.preventDefault();
                 onQuickView(product);
               }}
-              className="w-9 h-9 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center transition-transform hover:scale-110 active:scale-95 opacity-0 group-hover:opacity-100"
-              aria-label="Quick view"
+              className="w-9 h-9 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center transition-transform hover:scale-110 active:scale-95 opacity-0 group-hover:opacity-100 focus:opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-pink focus-visible:ring-offset-2"
+              aria-label={`Quick view ${product.name}`}
             >
-              <Eye className="w-5 h-5 stroke-gray-dark" strokeWidth={1.67} />
+              <Eye className="w-5 h-5 stroke-gray-dark" strokeWidth={1.67} aria-hidden="true" />
             </button>
           )}
         </div>

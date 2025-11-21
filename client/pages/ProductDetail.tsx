@@ -6,11 +6,12 @@ import { useCart } from "@/context/CartContext";
 import { useFavorites } from "@/context/FavoritesContext";
 import { useRecentlyViewed } from "@/hooks/use-recently-viewed";
 import { toast } from "@/hooks/use-toast";
-import { getProductById, products as allProducts, Product } from "@shared/products";
+import { getProductById, products as allProducts, Product, getCategoryById } from "@shared/products";
 import ReviewsModal from "@/components/ReviewsModal";
 import { ColorSwatch } from "@/components/ColorSwatch";
 import { ProductCard } from "@/components/ProductCard";
 import { QuickViewModal } from "@/components/QuickViewModal";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import useEmblaCarousel from "embla-carousel-react";
 
 export default function ProductDetail() {
@@ -153,36 +154,44 @@ export default function ProductDetail() {
 
   return (
     <div className="min-h-screen bg-white pb-20">
-      <div className="sticky top-0 bg-white/95 backdrop-blur-sm z-20 px-6 pt-14 pb-4 flex justify-between items-center border-b border-gray-border">
-        <button
-          onClick={() => navigate(-1)}
-          className="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center transition-colors"
-          aria-label="Go back"
-        >
-          <ChevronLeft className="w-6 h-6 stroke-gray-dark" strokeWidth={2} />
-        </button>
+      <div className="sticky top-0 bg-white/95 backdrop-blur-sm z-20 px-6 pt-14 pb-4 border-b border-gray-border">
+        <div className="flex justify-between items-center mb-3">
+          <button
+            onClick={() => navigate(-1)}
+            className="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-pink"
+            aria-label="Go back"
+          >
+            <ChevronLeft className="w-6 h-6 stroke-gray-dark" strokeWidth={2} />
+          </button>
 
-        <div className="flex gap-2">
-          <button
-            onClick={handleShare}
-            className="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center transition-colors"
-            aria-label="Share product"
-          >
-            <Share2 className="w-5 h-5 stroke-gray-dark" strokeWidth={2} />
-          </button>
-          <button
-            onClick={() => toggleFavorite(product)}
-            className="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center transition-all active:scale-95"
-            aria-label={isFav ? "Remove from favorites" : "Add to favorites"}
-          >
-            <Heart
-              className="w-5 h-5 transition-all"
-              fill={isFav ? "#EC003F" : "none"}
-              stroke={isFav ? "#EC003F" : "#101828"}
-              strokeWidth={2}
-            />
-          </button>
+          <div className="flex gap-2">
+            <button
+              onClick={handleShare}
+              className="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-pink"
+              aria-label="Share product"
+            >
+              <Share2 className="w-5 h-5 stroke-gray-dark" strokeWidth={2} />
+            </button>
+            <button
+              onClick={() => toggleFavorite(product)}
+              className="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center transition-all active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-pink"
+              aria-label={isFav ? "Remove from favorites" : "Add to favorites"}
+            >
+              <Heart
+                className="w-5 h-5 transition-all"
+                fill={isFav ? "#EC003F" : "none"}
+                stroke={isFav ? "#EC003F" : "#101828"}
+                strokeWidth={2}
+              />
+            </button>
+          </div>
         </div>
+        <Breadcrumbs
+          items={[
+            { label: getCategoryById(product.category)?.name || product.category, href: `/shop?category=${product.category}` },
+            { label: product.name },
+          ]}
+        />
       </div>
 
       <div className="relative">

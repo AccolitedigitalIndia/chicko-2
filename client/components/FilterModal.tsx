@@ -46,16 +46,16 @@ export function FilterModal({ isOpen, onClose, onApply, initialFilters }: Filter
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-end sm:items-center sm:justify-center">
+    <div className="fixed inset-0 bg-black/50 z-50 flex items-end sm:items-center sm:justify-center" role="dialog" aria-modal="true" aria-labelledby="filter-modal-title">
       <div className="bg-white w-full sm:max-w-md sm:rounded-2xl rounded-t-2xl max-h-[90vh] flex flex-col animate-in slide-in-from-bottom duration-300">
         <div className="flex items-center justify-between p-6 border-b border-gray-border">
-          <h2 className="text-gray-dark text-lg font-medium">Filters</h2>
+          <h2 id="filter-modal-title" className="text-gray-dark text-lg font-medium">Filters</h2>
           <button
             onClick={onClose}
-            className="w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center transition-colors"
+            className="w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-pink"
             aria-label="Close filters"
           >
-            <X className="w-5 h-5 stroke-gray-dark" />
+            <X className="w-5 h-5 stroke-gray-dark" aria-hidden="true" />
           </button>
         </div>
 
