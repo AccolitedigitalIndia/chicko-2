@@ -22,25 +22,25 @@ export const categories: Category[] = [
     id: "tops",
     name: "Tops",
     image:
-      "https://images.unsplash.com/photo-1485968579580-b6d095142e6e?w=400&h=400&fit=crop",
+      "https://images.pexels.com/photos/1980103/pexels-photo-1980103.jpeg?auto=compress&cs=tinysrgb&w=600",
   },
   {
     id: "dresses",
     name: "Dresses",
     image:
-      "https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=400&h=400&fit=crop",
+      "https://images.pexels.com/photos/19198599/pexels-photo-19198599.png?auto=compress&cs=tinysrgb&w=600",
   },
   {
     id: "bottoms",
     name: "Bottoms",
     image:
-      "https://images.unsplash.com/photo-1594633313593-bab3825d0caf?w=400&h=400&fit=crop",
+      "https://images.pexels.com/photos/514914/pexels-photo-514914.jpeg?auto=compress&cs=tinysrgb&w=600",
   },
   {
     id: "accessories",
     name: "Accessories",
     image:
-      "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400&h=400&fit=crop",
+      "https://images.pexels.com/photos/27127411/pexels-photo-27127411.jpeg?auto=compress&cs=tinysrgb&w=600",
   },
 ];
 
