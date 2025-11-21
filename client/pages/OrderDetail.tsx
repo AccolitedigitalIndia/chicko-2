@@ -185,7 +185,7 @@ export default function OrderDetail() {
       },
       payment: {
         method: "Visa ending in 4242",
-        amount: 264.5,
+        amount: 174.5,
       },
     },
   };
