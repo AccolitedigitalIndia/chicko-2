@@ -11,20 +11,21 @@ import { useState, useEffect } from "react";
 export default function Index() {
   const { toggleFavorite, isFavorite } = useFavorites();
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [showPromoBanner, setShowPromoBanner] = useState(true);
 
   const heroImages = [
     {
-      url: "https://api.builder.io/api/v1/image/assets/TEMP/8edbb79545dad257d30674c6aa5c67c383280142?width=830",
+      url: "https://images.pexels.com/photos/34778039/pexels-photo-34778039.jpeg?auto=compress&cs=tinysrgb&w=1600",
       title: "WINTER COLLECTION",
       subtitle: "Effortless Elegance",
     },
     {
-      url: "https://api.builder.io/api/v1/image/assets/TEMP/64dac7f003ea8759ac412708d9bdc40543b88157?width=860",
+      url: "https://images.pexels.com/photos/14041408/pexels-photo-14041408.jpeg?auto=compress&cs=tinysrgb&w=1600",
       title: "NEW ARRIVALS",
       subtitle: "Discover Fresh Styles",
     },
     {
-      url: "https://api.builder.io/api/v1/image/assets/TEMP/2ddc134b0c58a62bf03b2ecd3b5e270e5274f2e9?width=366",
+      url: "https://images.pexels.com/photos/28606334/pexels-photo-28606334.jpeg?auto=compress&cs=tinysrgb&w=1600",
       title: "EXCLUSIVE DESIGNS",
       subtitle: "Limited Edition",
     },
@@ -46,9 +47,26 @@ export default function Index() {
 
   return (
     <div className="min-h-screen bg-white pb-20">
-      <header className="flex justify-center items-center h-24 px-6">
-        <h1 className="text-brand-burgundy text-base font-normal tracking-[0.488px] flex items-center gap-2">
-          <Sparkles className="w-5 h-5 stroke-brand-burgundy" strokeWidth={2} />
+      {showPromoBanner && (
+        <div className="bg-brand-burgundy text-white py-2.5 px-4 text-center text-sm relative">
+          <p className="font-normal tracking-wide">
+            Free Shipping on Orders Over $75 | Extended Returns Through January
+          </p>
+          <button
+            onClick={() => setShowPromoBanner(false)}
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white text-lg"
+            aria-label="Close banner"
+          >
+            ×
+          </button>
+        </div>
+      )}
+      <header className="flex justify-center items-center h-28 px-6 bg-gradient-to-b from-brand-pink-light/30 to-white">
+        <h1 className="text-brand-burgundy text-3xl font-semibold tracking-wider flex items-center gap-3">
+          <Sparkles
+            className="w-8 h-8 stroke-brand-burgundy fill-brand-pink/10"
+            strokeWidth={2}
+          />
           LUMIÈRE
         </h1>
       </header>
