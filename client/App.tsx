@@ -45,8 +45,6 @@ const App = () => (
   </QueryClientProvider>
 );
 
-const rootElement = document.getElementById("root")!;
-if (!rootElement.hasAttribute("data-root-created")) {
-  rootElement.setAttribute("data-root-created", "true");
-  createRoot(rootElement).render(<App />);
-}
+const container = document.getElementById("root")!;
+const root = createRoot(container);
+root.render(<App />);
