@@ -37,33 +37,35 @@ const queryClient = new QueryClient({
 const App = () => (
   <ErrorBoundary>
     <QueryClientProvider client={queryClient}>
-      <CartProvider>
-        <FavoritesProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/shop" element={<Shop />} />
-                <Route path="/bag" element={<Bag />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/product/:id" element={<ProductDetail />} />
-                <Route path="/favorites" element={<Favorites />} />
-                <Route path="/checkout" element={<Checkout />} />
-                <Route path="/orders" element={<Orders />} />
-                <Route path="/orders/:orderId" element={<OrderDetail />} />
-                <Route path="/addresses" element={<Addresses />} />
-                <Route path="/payment-methods" element={<PaymentMethods />} />
-                <Route path="/notifications" element={<Notifications />} />
-                <Route path="/help" element={<Help />} />
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </BrowserRouter>
-          </TooltipProvider>
-        </FavoritesProvider>
-      </CartProvider>
+      <UserProvider>
+        <CartProvider>
+          <FavoritesProvider>
+            <TooltipProvider>
+              <Toaster />
+              <Sonner />
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/shop" element={<Shop />} />
+                  <Route path="/bag" element={<Bag />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/product/:id" element={<ProductDetail />} />
+                  <Route path="/favorites" element={<Favorites />} />
+                  <Route path="/checkout" element={<Checkout />} />
+                  <Route path="/orders" element={<Orders />} />
+                  <Route path="/orders/:orderId" element={<OrderDetail />} />
+                  <Route path="/addresses" element={<Addresses />} />
+                  <Route path="/payment-methods" element={<PaymentMethods />} />
+                  <Route path="/notifications" element={<Notifications />} />
+                  <Route path="/help" element={<Help />} />
+                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </BrowserRouter>
+            </TooltipProvider>
+          </FavoritesProvider>
+        </CartProvider>
+      </UserProvider>
     </QueryClientProvider>
   </ErrorBoundary>
 );
