@@ -50,7 +50,7 @@ export const products: Product[] = [
     name: "Silk Blend Tunic",
     price: 89.5,
     image:
-      "https://api.builder.io/api/v1/image/assets/TEMP/8af39074281630082168c452fc72bdaf2138be53?width=366",
+      "https://images.pexels.com/photos/4659798/pexels-photo-4659798.jpeg?auto=compress&cs=tinysrgb&w=800",
     category: "tops",
     description:
       "Elegant silk blend tunic with delicate details. Perfect for both casual and formal occasions.",
@@ -64,7 +64,7 @@ export const products: Product[] = [
     name: "Cotton Summer Dress",
     price: 129.0,
     image:
-      "https://api.builder.io/api/v1/image/assets/TEMP/2ddc134b0c58a62bf03b2ecd3b5e270e5274f2e9?width=366",
+      "https://images.pexels.com/photos/1887465/pexels-photo-1887465.jpeg?auto=compress&cs=tinysrgb&w=800",
     category: "dresses",
     description:
       "Breathable cotton summer dress with a flattering silhouette. Ideal for warm weather.",
@@ -78,7 +78,7 @@ export const products: Product[] = [
     name: "Linen Wide Leg Pants",
     price: 79.5,
     image:
-      "https://api.builder.io/api/v1/image/assets/TEMP/f67f230abffed2738ae3cbc3d943655440eb1c74?width=366",
+      "https://images.pexels.com/photos/8989581/pexels-photo-8989581.jpeg?auto=compress&cs=tinysrgb&w=800",
     category: "bottoms",
     description:
       "Comfortable linen wide leg pants with an elastic waistband. Effortlessly chic.",
@@ -92,7 +92,7 @@ export const products: Product[] = [
     name: "Statement Earrings",
     price: 95.0,
     image:
-      "https://api.builder.io/api/v1/image/assets/TEMP/49a02839c723043613b28fac743b3b2ce108ed73?width=366",
+      "https://images.pexels.com/photos/3266700/pexels-photo-3266700.jpeg?auto=compress&cs=tinysrgb&w=800",
     category: "accessories",
     description:
       "Elegant statement earrings with intricate design. Perfect accessory to elevate any outfit.",
@@ -106,7 +106,7 @@ export const products: Product[] = [
     name: "Maxi Floral Dress",
     price: 149.0,
     image:
-      "https://api.builder.io/api/v1/image/assets/TEMP/791488612b362212273f22e8ab46080f3cebb267?width=366",
+      "https://images.pexels.com/photos/20883861/pexels-photo-20883861.jpeg?auto=compress&cs=tinysrgb&w=800",
     category: "dresses",
     description:
       "Flowing maxi dress with vibrant floral print. Perfect for summer events and vacations.",
