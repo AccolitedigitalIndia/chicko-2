@@ -10,12 +10,14 @@ import { FilterModal, FilterState } from "@/components/FilterModal";
 import { BackToTop } from "@/components/BackToTop";
 import { EmptyState } from "@/components/EmptyState";
 import { Package } from "lucide-react";
+import { useDebounce } from "@/hooks/use-debounce";
 
 export default function Shop() {
   const [searchParams] = useSearchParams();
   const categoryParam = searchParams.get("category");
   const [activeFilter, setActiveFilter] = useState(categoryParam || "all");
   const [searchQuery, setSearchQuery] = useState("");
+  const debouncedSearchQuery = useDebounce(searchQuery, 300);
   const [showFilterModal, setShowFilterModal] = useState(false);
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(
     null,
@@ -39,7 +41,7 @@ export default function Shop() {
     setIsLoading(true);
     const timer = setTimeout(() => setIsLoading(false), 500);
     return () => clearTimeout(timer);
-  }, [activeFilter, searchQuery, filters]);
+  }, [activeFilter, debouncedSearchQuery, filters]);
 
   const filteredProducts = useMemo(() => {
     let filtered = [...allProducts];
@@ -56,8 +58,8 @@ export default function Shop() {
       );
     }
 
-    if (searchQuery) {
-      const query = searchQuery.toLowerCase();
+    if (debouncedSearchQuery) {
+      const query = debouncedSearchQuery.toLowerCase();
       filtered = filtered.filter(
         (product) =>
           product.name.toLowerCase().includes(query) ||
@@ -193,7 +195,7 @@ export default function Shop() {
         <p className="text-[#6A7282] text-sm tracking-[-0.15px] mb-4">
           {filteredProducts.length}{" "}
           {filteredProducts.length === 1 ? "item" : "items"}
-          {searchQuery && ` for "${searchQuery}"`}
+          {debouncedSearchQuery && ` for "${debouncedSearchQuery}"`}
         </p>
 
         {isLoading ? (
@@ -203,8 +205,8 @@ export default function Shop() {
             icon={Package}
             title="No products found"
             description={
-              searchQuery
-                ? `No results for "${searchQuery}". Try different keywords.`
+              debouncedSearchQuery
+                ? `No results for "${debouncedSearchQuery}". Try different keywords.`
                 : "Try adjusting your filters to see more products."
             }
             action={
