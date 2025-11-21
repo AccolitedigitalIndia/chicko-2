@@ -40,7 +40,7 @@ export const categories: Category[] = [
     id: "accessories",
     name: "Accessories",
     image:
-      "https://images.unsplash.com/photo-1611652022419-a9419f74343a?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=400&h=400&fit=crop",
   },
 ];
 
