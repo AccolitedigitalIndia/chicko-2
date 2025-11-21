@@ -25,22 +25,45 @@ export default function Index() {
         </h1>
       </header>
 
-      <section className="relative w-full h-[400px]">
-        <img
-          src="https://api.builder.io/api/v1/image/assets/TEMP/8edbb79545dad257d30674c6aa5c67c383280142?width=830"
-          alt="Winter Collection"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end items-center pb-10 gap-2">
-          <h2 className="text-white text-base font-normal tracking-[-0.312px]">
-            WINTER COLLECTION
-          </h2>
-          <p className="text-white/90 text-base font-normal tracking-[-0.312px]">
-            Effortless Elegance
-          </p>
-          <Link to="/shop" className="bg-white text-brand-burgundy px-8 py-3 rounded-full text-base font-normal tracking-[-0.312px] mt-2">
-            Shop Now
-          </Link>
+      <section className="relative w-full h-[400px] overflow-hidden">
+        {heroImages.map((slide, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-1000 ${
+              index === currentSlide ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <img
+              src={slide.url}
+              alt={slide.title}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end items-center pb-10 gap-2">
+              <h2 className="text-white text-base font-normal tracking-[-0.312px]">
+                {slide.title}
+              </h2>
+              <p className="text-white/90 text-base font-normal tracking-[-0.312px]">
+                {slide.subtitle}
+              </p>
+              <Link to="/shop" className="bg-white text-brand-burgundy px-8 py-3 rounded-full text-base font-normal tracking-[-0.312px] mt-2">
+                Shop Now
+              </Link>
+            </div>
+          </div>
+        ))}
+
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+          {heroImages.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-2 h-2 rounded-full transition-all ${
+                index === currentSlide
+                  ? "bg-white w-6"
+                  : "bg-white/50"
+              }`}
+            />
+          ))}
         </div>
       </section>
 

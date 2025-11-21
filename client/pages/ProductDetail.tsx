@@ -6,12 +6,14 @@ import { useCart } from "@/context/CartContext";
 import { useFavorites } from "@/context/FavoritesContext";
 import { toast } from "@/hooks/use-toast";
 import { getProductById } from "@shared/products";
+import ReviewsModal from "@/components/ReviewsModal";
 
 export default function ProductDetail() {
   const navigate = useNavigate();
   const { id } = useParams();
   const { addToCart } = useCart();
   const { toggleFavorite, isFavorite } = useFavorites();
+  const [showReviews, setShowReviews] = useState(false);
 
   const product = getProductById(Number(id));
 
@@ -193,6 +195,14 @@ export default function ProductDetail() {
       </div>
 
       <BottomNav />
+
+      <ReviewsModal
+        isOpen={showReviews}
+        onClose={() => setShowReviews(false)}
+        productName={product.name}
+        averageRating={product.rating}
+        totalReviews={product.reviews}
+      />
     </div>
   );
 }
