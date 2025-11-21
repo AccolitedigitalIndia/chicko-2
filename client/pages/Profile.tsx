@@ -9,13 +9,24 @@ import {
   HelpCircle,
   LogOut,
   ChevronRight,
+  Edit2,
+  Check,
+  X,
 } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useFavorites } from "@/context/FavoritesContext";
+import { useUser } from "@/context/UserContext";
+import { useState } from "react";
+import { toast } from "@/hooks/use-toast";
 
 export default function Profile() {
   const { getTotalItems } = useCart();
   const { favorites } = useFavorites();
+  const { user, updateUserName, updateUserEmail } = useUser();
+  const [isEditingName, setIsEditingName] = useState(false);
+  const [editedName, setEditedName] = useState(user.name || "");
+  const [isEditingEmail, setIsEditingEmail] = useState(false);
+  const [editedEmail, setEditedEmail] = useState(user.email || "");
 
   const menuItems = [
     { icon: Package, label: "My Orders", path: "/orders", badge: 3 },
