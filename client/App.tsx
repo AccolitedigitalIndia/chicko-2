@@ -24,6 +24,8 @@ import PaymentMethods from "./pages/PaymentMethods";
 import Notifications from "./pages/Notifications";
 import Help from "./pages/Help";
 import NotFound from "./pages/NotFound";
+import Wallet from "./pages/Wallet";
+import StoreLocator from "./pages/StoreLocator";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -58,6 +60,8 @@ const App = () => (
                   <Route path="/payment-methods" element={<PaymentMethods />} />
                   <Route path="/notifications" element={<Notifications />} />
                   <Route path="/help" element={<Help />} />
+                  <Route path="/wallet" element={<Wallet />} />
+                  <Route path="/store-locator" element={<StoreLocator />} />
                   {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                   <Route path="*" element={<NotFound />} />
                 </Routes>
