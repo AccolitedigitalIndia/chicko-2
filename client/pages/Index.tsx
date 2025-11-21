@@ -5,7 +5,7 @@ import {
   categories as allCategories,
   products as allProducts,
 } from "@shared/products";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { ProductCard } from "@/components/ProductCard";
 import { QuickViewModal } from "@/components/QuickViewModal";
 import { Newsletter } from "@/components/Newsletter";
@@ -24,8 +24,10 @@ export default function Index() {
   );
   const [isPaused, setIsPaused] = useState(false);
 
-  const autoplay = Autoplay({ delay: 4000, stopOnInteraction: true });
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [autoplay]);
+  const autoplayRef = useRef(
+    Autoplay({ delay: 4000, stopOnInteraction: true })
+  );
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [autoplayRef.current]);
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const heroImages = [
@@ -66,15 +68,29 @@ export default function Index() {
     [emblaApi],
   );
 
-  const handleMouseEnter = () => {
-    autoplay.stop();
-    setIsPaused(true);
-  };
+  const handleMouseEnter = useCallback(() => {
+    const autoplay = autoplayRef.current;
+    if (autoplay && typeof autoplay.stop === 'function') {
+      try {
+        autoplay.stop();
+        setIsPaused(true);
+      } catch (error) {
+        console.warn('Autoplay stop error:', error);
+      }
+    }
+  }, []);
 
-  const handleMouseLeave = () => {
-    autoplay.play();
-    setIsPaused(false);
-  };
+  const handleMouseLeave = useCallback(() => {
+    const autoplay = autoplayRef.current;
+    if (autoplay && typeof autoplay.play === 'function') {
+      try {
+        autoplay.play();
+        setIsPaused(false);
+      } catch (error) {
+        console.warn('Autoplay play error:', error);
+      }
+    }
+  }, []);
 
   const categoryLinks = allCategories.map((cat) => ({
     name: cat.name,
