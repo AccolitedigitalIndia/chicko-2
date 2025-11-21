@@ -6,14 +6,20 @@ import { ProductCard } from "@/components/ProductCard";
 import { EmptyState } from "@/components/EmptyState";
 import { QuickViewModal } from "@/components/QuickViewModal";
 import { BackToTop } from "@/components/BackToTop";
-import { Product } from "@shared/products";
-import { useState } from "react";
+import { Product, getProductById } from "@shared/products";
+import { useState, useMemo } from "react";
 
 export default function Favorites() {
   const { favorites } = useFavorites();
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(
     null,
   );
+
+  const favoriteProducts = useMemo(() => {
+    return favorites
+      .map((fav) => getProductById(fav.id))
+      .filter((product): product is Product => product !== undefined);
+  }, [favorites]);
 
   return (
     <div className="min-h-screen bg-white pb-20">
@@ -43,10 +49,10 @@ export default function Favorites() {
           />
         ) : (
           <div className="grid grid-cols-2 gap-4">
-            {favorites.map((item) => (
+            {favoriteProducts.map((product) => (
               <ProductCard
-                key={item.id}
-                product={item}
+                key={product.id}
+                product={product}
                 onQuickView={setQuickViewProduct}
               />
             ))}

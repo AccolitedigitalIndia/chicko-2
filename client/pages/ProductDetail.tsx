@@ -26,6 +26,7 @@ import { QuickViewModal } from "@/components/QuickViewModal";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import useEmblaCarousel from "embla-carousel-react";
 import { OptimizedImage } from "@/components/OptimizedImage";
+import { StorePickerModal, StoreLocation } from "@/components/StorePickerModal";
 
 export default function ProductDetail() {
   const navigate = useNavigate();
@@ -39,6 +40,13 @@ export default function ProductDetail() {
   );
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [deliveryOption, setDeliveryOption] = useState<"ship" | "pickup">(
+    "ship",
+  );
+  const [selectedStore, setSelectedStore] = useState<StoreLocation | null>(
+    null,
+  );
+  const [showStorePicker, setShowStorePicker] = useState(false);
 
   const product = getProductById(Number(id));
 
@@ -403,6 +411,74 @@ export default function ProductDetail() {
           </div>
         </div>
 
+        <div className="flex flex-col gap-3 pb-6 border-b border-gray-border">
+          <span className="text-gray-dark text-base font-medium tracking-[-0.312px]">
+            Delivery Options
+          </span>
+          <div className="flex gap-3">
+            <button
+              onClick={() => setDeliveryOption("ship")}
+              className={`flex-1 py-3 rounded-xl border-2 text-sm font-normal tracking-[-0.15px] transition-all ${
+                deliveryOption === "ship"
+                  ? "border-brand-pink bg-brand-pink-light text-brand-pink"
+                  : "border-gray-border text-gray-dark hover:border-gray-300"
+              }`}
+            >
+              Ship to Home
+            </button>
+            <button
+              onClick={() => {
+                setDeliveryOption("pickup");
+                if (!selectedStore) {
+                  setShowStorePicker(true);
+                }
+              }}
+              className={`flex-1 py-3 rounded-xl border-2 text-sm font-normal tracking-[-0.15px] transition-all ${
+                deliveryOption === "pickup"
+                  ? "border-brand-pink bg-brand-pink-light text-brand-pink"
+                  : "border-gray-border text-gray-dark hover:border-gray-300"
+              }`}
+            >
+              Pickup In-Store
+            </button>
+          </div>
+
+          {deliveryOption === "pickup" && (
+            <div className="mt-2">
+              {selectedStore ? (
+                <div className="p-3 bg-green-50 border border-green-200 rounded-xl">
+                  <div className="flex justify-between items-start">
+                    <div className="flex-1">
+                      <p className="text-gray-dark text-sm font-medium tracking-[-0.15px] mb-1">
+                        {selectedStore.name}
+                      </p>
+                      <p className="text-[#6A7282] text-xs tracking-[-0.15px]">
+                        {selectedStore.address}, {selectedStore.city}
+                      </p>
+                      <p className="text-green-700 text-xs tracking-[-0.15px] mt-1">
+                        ✓ Ready for pickup today
+                      </p>
+                    </div>
+                    <button
+                      onClick={() => setShowStorePicker(true)}
+                      className="text-brand-pink text-xs font-normal tracking-[-0.15px] hover:text-brand-burgundy ml-2"
+                    >
+                      Change
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <button
+                  onClick={() => setShowStorePicker(true)}
+                  className="w-full py-3 bg-white border-2 border-gray-border rounded-xl text-gray-dark text-sm font-normal tracking-[-0.15px] hover:border-gray-300 transition-colors"
+                >
+                  Select a Store
+                </button>
+              )}
+            </div>
+          )}
+        </div>
+
         {product.stock === 0 ? (
           <button
             onClick={handleNotifyMe}
@@ -476,6 +552,13 @@ export default function ProductDetail() {
       <QuickViewModal
         product={quickViewProduct}
         onClose={() => setQuickViewProduct(null)}
+      />
+
+      <StorePickerModal
+        isOpen={showStorePicker}
+        onClose={() => setShowStorePicker(false)}
+        onSelectStore={setSelectedStore}
+        selectedStore={selectedStore}
       />
     </div>
   );
