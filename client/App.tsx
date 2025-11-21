@@ -46,5 +46,10 @@ const App = () => (
 );
 
 const container = document.getElementById("root")!;
-const root = createRoot(container);
+
+let root = (window as any).__react_root__;
+if (!root) {
+  root = createRoot(container);
+  (window as any).__react_root__ = root;
+}
 root.render(<App />);
