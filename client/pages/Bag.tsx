@@ -1,8 +1,10 @@
 import { BottomNav } from "@/components/BottomNav";
 import { useCart } from "@/context/CartContext";
+import { useNavigate } from "react-router-dom";
 import { Minus, Plus, Trash2 } from "lucide-react";
 
 export default function Bag() {
+  const navigate = useNavigate();
   const { items, updateQuantity, removeFromCart, getSubtotal, getTotalItems } = useCart();
 
   const subtotal = getSubtotal();
@@ -148,7 +150,10 @@ export default function Bag() {
             </div>
           </div>
 
-          <button className="w-full py-4 bg-brand-pink text-white rounded-full text-base font-normal tracking-[-0.312px]">
+          <button
+            onClick={() => navigate("/checkout")}
+            className="w-full py-4 bg-brand-pink text-white rounded-full text-base font-normal tracking-[-0.312px]"
+          >
             Proceed to Checkout
           </button>
         </div>
