@@ -89,17 +89,17 @@ export const products: Product[] = [
   },
   {
     id: 4,
-    name: "Embroidered Blouse",
+    name: "Statement Earrings",
     price: 95.0,
     image:
       "https://api.builder.io/api/v1/image/assets/TEMP/49a02839c723043613b28fac743b3b2ce108ed73?width=366",
-    category: "tops",
+    category: "accessories",
     description:
-      "Beautifully embroidered blouse with intricate patterns. A statement piece for any wardrobe.",
+      "Elegant statement earrings with intricate design. Perfect accessory to elevate any outfit.",
     rating: 5,
     reviews: 142,
-    colors: ["White", "Cream", "Burgundy"],
-    sizes: ["XS", "S", "M", "L", "XL"],
+    colors: ["Gold", "Silver", "Rose Gold"],
+    sizes: ["One Size"],
   },
   {
     id: 5,
@@ -114,20 +114,6 @@ export const products: Product[] = [
     reviews: 89,
     colors: ["Floral Multi", "Navy Floral", "Pink Floral"],
     sizes: ["XS", "S", "M", "L", "XL"],
-  },
-  {
-    id: 6,
-    name: "Leather Crossbody Bag",
-    price: 185.0,
-    image:
-      "https://api.builder.io/api/v1/image/assets/TEMP/e581d93ee8ebe8e7bf849403f2ec4c3a7e861f9e?width=351",
-    category: "accessories",
-    description:
-      "Premium leather crossbody bag with adjustable strap. Stylish and functional.",
-    rating: 4.9,
-    reviews: 203,
-    colors: ["Tan", "Black", "Cognac"],
-    sizes: ["One Size"],
   },
 ];
 
