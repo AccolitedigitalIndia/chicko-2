@@ -14,12 +14,42 @@ export default function OrderDetail() {
       status: "Delivered",
       deliveryDate: "December 18, 2024",
       timeline: [
-        { status: "Order Received", date: "Dec 15, 2024", time: "10:30 AM", completed: true },
-        { status: "Packed", date: "Dec 15, 2024", time: "2:45 PM", completed: true },
-        { status: "Shipped", date: "Dec 16, 2024", time: "9:15 AM", completed: true },
-        { status: "In Transit", date: "Dec 17, 2024", time: "8:20 AM", completed: true },
-        { status: "Out for Delivery", date: "Dec 18, 2024", time: "7:00 AM", completed: true },
-        { status: "Delivered", date: "Dec 18, 2024", time: "3:30 PM", completed: true },
+        {
+          status: "Order Received",
+          date: "Dec 15, 2024",
+          time: "10:30 AM",
+          completed: true,
+        },
+        {
+          status: "Packed",
+          date: "Dec 15, 2024",
+          time: "2:45 PM",
+          completed: true,
+        },
+        {
+          status: "Shipped",
+          date: "Dec 16, 2024",
+          time: "9:15 AM",
+          completed: true,
+        },
+        {
+          status: "In Transit",
+          date: "Dec 17, 2024",
+          time: "8:20 AM",
+          completed: true,
+        },
+        {
+          status: "Out for Delivery",
+          date: "Dec 18, 2024",
+          time: "7:00 AM",
+          completed: true,
+        },
+        {
+          status: "Delivered",
+          date: "Dec 18, 2024",
+          time: "3:30 PM",
+          completed: true,
+        },
       ],
       items: [
         {
@@ -48,7 +78,7 @@ export default function OrderDetail() {
       },
       payment: {
         method: "Visa ending in 4242",
-        amount: 179.50,
+        amount: 179.5,
       },
     },
     "ORD-2024-002": {
@@ -57,10 +87,30 @@ export default function OrderDetail() {
       status: "In Transit",
       deliveryDate: "December 20, 2024",
       timeline: [
-        { status: "Order Received", date: "Dec 10, 2024", time: "11:20 AM", completed: true },
-        { status: "Packed", date: "Dec 10, 2024", time: "4:15 PM", completed: true },
-        { status: "Shipped", date: "Dec 11, 2024", time: "8:45 AM", completed: true },
-        { status: "In Transit", date: "Dec 12, 2024", time: "6:30 AM", completed: true },
+        {
+          status: "Order Received",
+          date: "Dec 10, 2024",
+          time: "11:20 AM",
+          completed: true,
+        },
+        {
+          status: "Packed",
+          date: "Dec 10, 2024",
+          time: "4:15 PM",
+          completed: true,
+        },
+        {
+          status: "Shipped",
+          date: "Dec 11, 2024",
+          time: "8:45 AM",
+          completed: true,
+        },
+        {
+          status: "In Transit",
+          date: "Dec 12, 2024",
+          time: "6:30 AM",
+          completed: true,
+        },
         { status: "Out for Delivery", date: "", time: "", completed: false },
         { status: "Delivered", date: "", time: "", completed: false },
       ],
@@ -82,7 +132,7 @@ export default function OrderDetail() {
       },
       payment: {
         method: "Visa ending in 4242",
-        amount: 149.00,
+        amount: 149.0,
       },
     },
     "ORD-2024-003": {
@@ -91,8 +141,18 @@ export default function OrderDetail() {
       status: "Processing",
       deliveryDate: "December 22, 2024",
       timeline: [
-        { status: "Order Received", date: "Dec 5, 2024", time: "3:45 PM", completed: true },
-        { status: "Packed", date: "Dec 6, 2024", time: "10:30 AM", completed: true },
+        {
+          status: "Order Received",
+          date: "Dec 5, 2024",
+          time: "3:45 PM",
+          completed: true,
+        },
+        {
+          status: "Packed",
+          date: "Dec 6, 2024",
+          time: "10:30 AM",
+          completed: true,
+        },
         { status: "Shipped", date: "", time: "", completed: false },
         { status: "In Transit", date: "", time: "", completed: false },
         { status: "Out for Delivery", date: "", time: "", completed: false },
@@ -125,7 +185,7 @@ export default function OrderDetail() {
       },
       payment: {
         method: "Visa ending in 4242",
-        amount: 264.50,
+        amount: 264.5,
       },
     },
   };
@@ -167,8 +227,11 @@ export default function OrderDetail() {
     }
   };
 
-  const subtotal = order.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const shipping = 7.50;
+  const subtotal = order.items.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0,
+  );
+  const shipping = 7.5;
   const tax = subtotal * 0.08;
 
   return (
@@ -195,7 +258,9 @@ export default function OrderDetail() {
               Placed on {order.date}
             </p>
           </div>
-          <div className={`px-3 py-1 rounded-full text-xs font-normal ${getStatusColor(order.status)}`}>
+          <div
+            className={`px-3 py-1 rounded-full text-xs font-normal ${getStatusColor(order.status)}`}
+          >
             {order.status}
           </div>
         </div>
@@ -218,9 +283,7 @@ export default function OrderDetail() {
                 <div className="flex flex-col items-center">
                   <div
                     className={`w-10 h-10 rounded-full flex items-center justify-center z-10 ${
-                      step.completed
-                        ? "bg-brand-pink"
-                        : "bg-gray-border"
+                      step.completed ? "bg-brand-pink" : "bg-gray-border"
                     }`}
                   >
                     {step.completed ? (
@@ -247,7 +310,9 @@ export default function OrderDetail() {
                     ></div>
                   )}
                 </div>
-                <div className={`flex-1 ${index < order.timeline.length - 1 ? 'pb-6' : ''}`}>
+                <div
+                  className={`flex-1 ${index < order.timeline.length - 1 ? "pb-6" : ""}`}
+                >
                   <p
                     className={`text-base font-normal tracking-[-0.312px] ${
                       step.completed ? "text-gray-dark" : "text-gray-light"
@@ -301,7 +366,10 @@ export default function OrderDetail() {
             Shipping Address
           </h3>
           <div className="flex gap-3 p-4 rounded-2xl bg-[#F9FAFB]">
-            <MapPin className="w-6 h-6 stroke-gray-medium flex-shrink-0" strokeWidth={1.67} />
+            <MapPin
+              className="w-6 h-6 stroke-gray-medium flex-shrink-0"
+              strokeWidth={1.67}
+            />
             <div className="flex flex-col gap-1">
               <p className="text-gray-dark text-base font-normal tracking-[-0.312px]">
                 {order.shipping.name}
@@ -321,7 +389,10 @@ export default function OrderDetail() {
             Payment Method
           </h3>
           <div className="flex gap-3 p-4 rounded-2xl bg-[#F9FAFB]">
-            <CreditCard className="w-6 h-6 stroke-gray-medium flex-shrink-0" strokeWidth={1.67} />
+            <CreditCard
+              className="w-6 h-6 stroke-gray-medium flex-shrink-0"
+              strokeWidth={1.67}
+            />
             <div className="flex flex-col gap-1">
               <p className="text-gray-dark text-base font-normal tracking-[-0.312px]">
                 {order.payment.method}

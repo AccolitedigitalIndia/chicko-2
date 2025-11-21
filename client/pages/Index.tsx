@@ -2,12 +2,15 @@ import { BottomNav } from "@/components/BottomNav";
 import { Link } from "react-router-dom";
 import { Heart, ChevronRight } from "lucide-react";
 import { useFavorites } from "@/context/FavoritesContext";
-import { categories as allCategories, products as allProducts } from "@shared/products";
+import {
+  categories as allCategories,
+  products as allProducts,
+} from "@shared/products";
 
 export default function Index() {
   const { toggleFavorite, isFavorite } = useFavorites();
 
-  const categoryLinks = allCategories.map(cat => ({
+  const categoryLinks = allCategories.map((cat) => ({
     name: cat.name,
     path: `/shop?category=${cat.id}`,
   }));
@@ -55,7 +58,10 @@ export default function Index() {
               <span className="text-brand-burgundy text-base font-normal tracking-[-0.312px] text-center">
                 {category.name}
               </span>
-              <ChevronRight className="w-5 h-5 stroke-brand-pink" strokeWidth={1.67} />
+              <ChevronRight
+                className="w-5 h-5 stroke-brand-pink"
+                strokeWidth={1.67}
+              />
             </Link>
           ))}
         </div>
@@ -78,7 +84,11 @@ export default function Index() {
           {featuredProducts.map((product) => {
             const isFav = isFavorite(product.id);
             return (
-              <Link key={product.id} to={`/product/${product.id}`} className="flex flex-col">
+              <Link
+                key={product.id}
+                to={`/product/${product.id}`}
+                className="flex flex-col"
+              >
                 <div className="relative rounded-[10px] overflow-hidden mb-3">
                   <img
                     src={product.image}

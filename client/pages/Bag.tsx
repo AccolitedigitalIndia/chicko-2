@@ -5,10 +5,11 @@ import { Minus, Plus, Trash2 } from "lucide-react";
 
 export default function Bag() {
   const navigate = useNavigate();
-  const { items, updateQuantity, removeFromCart, getSubtotal, getTotalItems } = useCart();
+  const { items, updateQuantity, removeFromCart, getSubtotal, getTotalItems } =
+    useCart();
 
   const subtotal = getSubtotal();
-  const shipping = 7.50;
+  const shipping = 7.5;
   const tax = subtotal * 0.08;
   const total = subtotal + shipping + tax;
 
@@ -52,10 +53,15 @@ export default function Bag() {
                       {item.name}
                     </h3>
                     <button
-                      onClick={() => removeFromCart(item.id, item.size, item.color)}
+                      onClick={() =>
+                        removeFromCart(item.id, item.size, item.color)
+                      }
                       className="w-5 h-6 flex items-center justify-center"
                     >
-                      <Trash2 className="w-5 h-5 stroke-gray-light" strokeWidth={1.67} />
+                      <Trash2
+                        className="w-5 h-5 stroke-gray-light"
+                        strokeWidth={1.67}
+                      />
                     </button>
                   </div>
 
@@ -71,12 +77,15 @@ export default function Bag() {
                             item.id,
                             item.size,
                             item.color,
-                            item.quantity - 1
+                            item.quantity - 1,
                           )
                         }
                         className="w-4 h-4 flex items-center justify-center"
                       >
-                        <Minus className="w-4 h-4 stroke-gray-medium" strokeWidth={1.33} />
+                        <Minus
+                          className="w-4 h-4 stroke-gray-medium"
+                          strokeWidth={1.33}
+                        />
                       </button>
                       <span className="text-gray-dark text-base font-normal tracking-[-0.312px] min-w-[8px] text-center">
                         {item.quantity}
@@ -87,12 +96,15 @@ export default function Bag() {
                             item.id,
                             item.size,
                             item.color,
-                            item.quantity + 1
+                            item.quantity + 1,
                           )
                         }
                         className="w-4 h-4 flex items-center justify-center"
                       >
-                        <Plus className="w-4 h-4 stroke-gray-medium" strokeWidth={1.33} />
+                        <Plus
+                          className="w-4 h-4 stroke-gray-medium"
+                          strokeWidth={1.33}
+                        />
                       </button>
                     </div>
                     <p className="text-brand-pink text-base font-normal tracking-[-0.312px]">

@@ -1,6 +1,15 @@
 import { BottomNav } from "@/components/BottomNav";
 import { Link } from "react-router-dom";
-import { Package, Heart, MapPin, CreditCard, Bell, HelpCircle, LogOut, ChevronRight } from "lucide-react";
+import {
+  Package,
+  Heart,
+  MapPin,
+  CreditCard,
+  Bell,
+  HelpCircle,
+  LogOut,
+  ChevronRight,
+} from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useFavorites } from "@/context/FavoritesContext";
 
@@ -10,7 +19,12 @@ export default function Profile() {
 
   const menuItems = [
     { icon: Package, label: "My Orders", path: "/orders", badge: 3 },
-    { icon: Heart, label: "Favorites", path: "/favorites", badge: favorites.length },
+    {
+      icon: Heart,
+      label: "Favorites",
+      path: "/favorites",
+      badge: favorites.length,
+    },
     { icon: MapPin, label: "Addresses", path: "/addresses" },
     { icon: CreditCard, label: "Payment Methods", path: "/payment-methods" },
     { icon: Bell, label: "Notifications", path: "/notifications" },
@@ -85,7 +99,10 @@ export default function Profile() {
                   </span>
                 </div>
               )}
-              <ChevronRight className="w-5 h-5 stroke-gray-light" strokeWidth={1.67} />
+              <ChevronRight
+                className="w-5 h-5 stroke-gray-light"
+                strokeWidth={1.67}
+              />
             </Link>
           );
         })}

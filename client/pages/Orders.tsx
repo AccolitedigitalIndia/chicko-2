@@ -20,7 +20,7 @@ export default function Orders() {
       id: "ORD-2024-001",
       date: "Dec 15, 2024",
       status: "Delivered",
-      total: 218.50,
+      total: 218.5,
       items: 2,
       image: products[0].image,
     },
@@ -28,7 +28,7 @@ export default function Orders() {
       id: "ORD-2024-002",
       date: "Dec 10, 2024",
       status: "In Transit",
-      total: 149.00,
+      total: 149.0,
       items: 1,
       image: products[4].image,
     },
@@ -36,7 +36,7 @@ export default function Orders() {
       id: "ORD-2024-003",
       date: "Dec 5, 2024",
       status: "Processing",
-      total: 264.50,
+      total: 264.5,
       items: 2,
       image: products[5].image,
     },
@@ -89,14 +89,20 @@ export default function Orders() {
                     {order.id}
                   </p>
                   <p className="text-[#6A7282] text-sm tracking-[-0.15px]">
-                    {order.date} • {order.items} {order.items === 1 ? "item" : "items"}
+                    {order.date} • {order.items}{" "}
+                    {order.items === 1 ? "item" : "items"}
                   </p>
                 </div>
-                <ChevronLeft className="w-5 h-5 stroke-gray-light rotate-180" strokeWidth={1.67} />
+                <ChevronLeft
+                  className="w-5 h-5 stroke-gray-light rotate-180"
+                  strokeWidth={1.67}
+                />
               </div>
 
               <div className="flex justify-between items-center">
-                <div className={`px-3 py-1 rounded-full text-xs font-normal ${getStatusColor(order.status)}`}>
+                <div
+                  className={`px-3 py-1 rounded-full text-xs font-normal ${getStatusColor(order.status)}`}
+                >
                   {order.status}
                 </div>
                 <p className="text-brand-pink text-base font-normal tracking-[-0.312px]">
@@ -110,7 +116,10 @@ export default function Orders() {
         {orders.length === 0 && (
           <div className="flex flex-col items-center justify-center py-16">
             <div className="w-20 h-20 rounded-full bg-[#F9FAFB] flex items-center justify-center mb-4">
-              <Package className="w-10 h-10 stroke-gray-light" strokeWidth={1.5} />
+              <Package
+                className="w-10 h-10 stroke-gray-light"
+                strokeWidth={1.5}
+              />
             </div>
             <p className="text-gray-medium text-base mb-2">No orders yet</p>
             <p className="text-[#6A7282] text-sm text-center">

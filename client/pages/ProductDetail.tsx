@@ -66,7 +66,7 @@ export default function ProductDetail() {
           alt={product.name}
           className="w-full h-[480px] object-cover"
         />
-        
+
         <div className="absolute top-0 left-0 right-0 flex justify-between items-center px-6 pt-14">
           <button
             onClick={() => navigate(-1)}
@@ -97,7 +97,9 @@ export default function ProductDetail() {
       <div className="px-6 pt-6 pb-8 flex flex-col gap-6">
         <div className="flex justify-between items-start">
           <div className="flex flex-col gap-1">
-            <p className="text-[#6A7282] text-sm tracking-[-0.15px] capitalize">{product.category}</p>
+            <p className="text-[#6A7282] text-sm tracking-[-0.15px] capitalize">
+              {product.category}
+            </p>
             <h2 className="text-gray-dark text-base font-normal tracking-[-0.312px]">
               {product.name}
             </h2>
@@ -119,7 +121,9 @@ export default function ProductDetail() {
               />
             ))}
           </div>
-          <p className="text-[#6A7282] text-sm tracking-[-0.15px]">({product.reviews} reviews)</p>
+          <p className="text-[#6A7282] text-sm tracking-[-0.15px]">
+            ({product.reviews} reviews)
+          </p>
         </div>
 
         <p className="text-gray-medium text-base font-normal leading-[26px] tracking-[-0.312px]">
@@ -161,7 +165,9 @@ export default function ProductDetail() {
               Size Guide
             </button>
           </div>
-          <div className={`grid gap-2 ${product.sizes.length > 1 ? 'grid-cols-5' : 'grid-cols-1'}`}>
+          <div
+            className={`grid gap-2 ${product.sizes.length > 1 ? "grid-cols-5" : "grid-cols-1"}`}
+          >
             {product.sizes.map((size) => (
               <button
                 key={size}

@@ -66,14 +66,14 @@ export default function PaymentMethods() {
           >
             {method.isDefault && (
               <div className="absolute top-4 right-4 px-2 py-1 rounded-full bg-brand-pink-light">
-                <span className="text-brand-pink text-xs font-normal">Default</span>
+                <span className="text-brand-pink text-xs font-normal">
+                  Default
+                </span>
               </div>
             )}
-            
+
             <div className="flex gap-4">
-              <div className="flex-shrink-0">
-                {getCardIcon(method.type)}
-              </div>
+              <div className="flex-shrink-0">{getCardIcon(method.type)}</div>
               <div className="flex-1 flex flex-col gap-2 pr-16">
                 <p className="text-gray-dark text-base font-normal tracking-[-0.312px]">
                   {method.type} ending in {method.lastFour}

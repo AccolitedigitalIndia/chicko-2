@@ -61,12 +61,17 @@ export default function Addresses() {
           >
             {address.isDefault && (
               <div className="absolute top-4 right-4 px-2 py-1 rounded-full bg-brand-pink-light">
-                <span className="text-brand-pink text-xs font-normal">Default</span>
+                <span className="text-brand-pink text-xs font-normal">
+                  Default
+                </span>
               </div>
             )}
-            
+
             <div className="flex gap-3">
-              <MapPin className="w-6 h-6 stroke-gray-medium flex-shrink-0 mt-1" strokeWidth={1.67} />
+              <MapPin
+                className="w-6 h-6 stroke-gray-medium flex-shrink-0 mt-1"
+                strokeWidth={1.67}
+              />
               <div className="flex-1 flex flex-col gap-2 pr-16">
                 <p className="text-gray-dark text-base font-normal tracking-[-0.312px]">
                   {address.name}

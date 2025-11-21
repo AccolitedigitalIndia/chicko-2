@@ -20,8 +20,13 @@ export default function Favorites() {
       <div className="px-6 py-6">
         {favorites.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-16">
-            <Heart className="w-16 h-16 stroke-gray-light mb-4" strokeWidth={1.5} />
-            <p className="text-gray-medium text-base mb-2">Your wishlist is empty</p>
+            <Heart
+              className="w-16 h-16 stroke-gray-light mb-4"
+              strokeWidth={1.5}
+            />
+            <p className="text-gray-medium text-base mb-2">
+              Your wishlist is empty
+            </p>
             <p className="text-[#6A7282] text-sm text-center">
               Add items you love to your wishlist
             </p>
@@ -30,7 +35,10 @@ export default function Favorites() {
           <div className="grid grid-cols-2 gap-4">
             {favorites.map((item) => (
               <div key={item.id} className="flex flex-col">
-                <Link to={`/product/${item.id}`} className="relative rounded-[10px] overflow-hidden mb-3">
+                <Link
+                  to={`/product/${item.id}`}
+                  className="relative rounded-[10px] overflow-hidden mb-3"
+                >
                   <img
                     src={item.image}
                     alt={item.name}

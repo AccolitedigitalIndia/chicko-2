@@ -17,11 +17,12 @@ export default function Shop() {
     }
   }, [categoryParam]);
 
-  const filters = ["all", ...categories.map(cat => cat.id)];
+  const filters = ["all", ...categories.map((cat) => cat.id)];
 
-  const filteredProducts = activeFilter === "all"
-    ? allProducts
-    : allProducts.filter(product => product.category === activeFilter);
+  const filteredProducts =
+    activeFilter === "all"
+      ? allProducts
+      : allProducts.filter((product) => product.category === activeFilter);
 
   return (
     <div className="min-h-screen bg-white pb-20">
@@ -31,22 +32,29 @@ export default function Shop() {
         </h2>
 
         <div className="relative">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 stroke-gray-light" strokeWidth={1.67} />
+          <Search
+            className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 stroke-gray-light"
+            strokeWidth={1.67}
+          />
           <input
             type="text"
             placeholder="Search for styles..."
             className="w-full h-[50px] pl-12 pr-14 rounded-full border border-gray-border bg-[#F9FAFB] text-base tracking-[-0.312px] placeholder:text-black/50 focus:outline-none focus:ring-2 focus:ring-brand-pink/20"
           />
           <button className="absolute right-4 top-1/2 -translate-y-1/2">
-            <SlidersHorizontal className="w-5 h-5 stroke-gray-medium" strokeWidth={1.67} />
+            <SlidersHorizontal
+              className="w-5 h-5 stroke-gray-medium"
+              strokeWidth={1.67}
+            />
           </button>
         </div>
 
         <div className="flex gap-2 overflow-x-auto scrollbar-hide">
           {filters.map((filter) => {
-            const categoryName = filter === "all"
-              ? "All"
-              : categories.find(cat => cat.id === filter)?.name || filter;
+            const categoryName =
+              filter === "all"
+                ? "All"
+                : categories.find((cat) => cat.id === filter)?.name || filter;
             return (
               <button
                 key={filter}
@@ -73,7 +81,11 @@ export default function Shop() {
           {filteredProducts.map((product) => {
             const isFav = isFavorite(product.id);
             return (
-              <Link key={product.id} to={`/product/${product.id}`} className="flex flex-col">
+              <Link
+                key={product.id}
+                to={`/product/${product.id}`}
+                className="flex flex-col"
+              >
                 <div className="relative rounded-[10px] overflow-hidden mb-3">
                   <img
                     src={product.image}

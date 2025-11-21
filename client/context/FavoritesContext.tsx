@@ -15,7 +15,9 @@ interface FavoritesContextType {
   toggleFavorite: (item: FavoriteItem) => void;
 }
 
-const FavoritesContext = createContext<FavoritesContextType | undefined>(undefined);
+const FavoritesContext = createContext<FavoritesContextType | undefined>(
+  undefined,
+);
 
 export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
   const [favorites, setFavorites] = useState<FavoriteItem[]>([]);

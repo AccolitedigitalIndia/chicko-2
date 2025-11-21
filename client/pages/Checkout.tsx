@@ -12,7 +12,7 @@ export default function Checkout() {
   const [orderComplete, setOrderComplete] = useState(false);
 
   const subtotal = getSubtotal();
-  const shipping = 7.50;
+  const shipping = 7.5;
   const tax = subtotal * 0.08;
   const total = subtotal + shipping + tax;
 
@@ -32,15 +32,22 @@ export default function Checkout() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handlePlaceOrder = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!formData.fullName || !formData.email || !formData.address || 
-        !formData.city || !formData.zipCode || !formData.cardNumber || 
-        !formData.expiryDate || !formData.cvv) {
+    if (
+      !formData.fullName ||
+      !formData.email ||
+      !formData.address ||
+      !formData.city ||
+      !formData.zipCode ||
+      !formData.cardNumber ||
+      !formData.expiryDate ||
+      !formData.cvv
+    ) {
       toast({
         title: "Missing information",
         description: "Please fill in all required fields",
@@ -55,7 +62,7 @@ export default function Checkout() {
       setIsProcessing(false);
       setOrderComplete(true);
       clearCart();
-      
+
       toast({
         title: "Order placed successfully",
         description: "Your order has been confirmed",
@@ -122,7 +129,8 @@ export default function Checkout() {
         </h2>
 
         <p className="text-gray-medium text-base text-center mb-8">
-          Thank you for your purchase. You will receive a confirmation email shortly.
+          Thank you for your purchase. You will receive a confirmation email
+          shortly.
         </p>
 
         <button
@@ -335,7 +343,10 @@ export default function Checkout() {
 
             <div className="flex flex-col gap-3 mb-4">
               {items.map((item) => (
-                <div key={`${item.id}-${item.size}-${item.color}`} className="flex gap-3">
+                <div
+                  key={`${item.id}-${item.size}-${item.color}`}
+                  className="flex gap-3"
+                >
                   <div className="w-16 h-20 rounded-[10px] overflow-hidden flex-shrink-0">
                     <img
                       src={item.image}

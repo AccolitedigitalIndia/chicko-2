@@ -6,7 +6,7 @@ export const BottomNav = () => {
   const location = useLocation();
   const { getTotalItems } = useCart();
   const totalItems = getTotalItems();
-  
+
   const navItems = [
     { path: "/", icon: Home, label: "Home" },
     { path: "/shop", icon: Search, label: "Shop" },
@@ -20,7 +20,7 @@ export const BottomNav = () => {
         {navItems.map((item) => {
           const isActive = location.pathname === item.path;
           const Icon = item.icon;
-          
+
           return (
             <Link
               key={item.path}

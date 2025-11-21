@@ -19,7 +19,8 @@ export default function Notifications() {
       id: "1",
       type: "promo",
       title: "🎄 Christmas Special! 20% OFF",
-      message: "Celebrate the season with 20% off on all items! Use code XMAS20 at checkout. Valid until Dec 25th.",
+      message:
+        "Celebrate the season with 20% off on all items! Use code XMAS20 at checkout. Valid until Dec 25th.",
       date: "2 hours ago",
       read: false,
     },
@@ -43,7 +44,8 @@ export default function Notifications() {
       id: "4",
       type: "order",
       title: "Order Shipped",
-      message: "Your order ORD-2024-002 is on its way! Expected delivery: Dec 20th.",
+      message:
+        "Your order ORD-2024-002 is on its way! Expected delivery: Dec 20th.",
       date: "3 days ago",
       read: true,
     },
@@ -60,13 +62,19 @@ export default function Notifications() {
   const getIcon = (type: Notification["type"]) => {
     switch (type) {
       case "promo":
-        return <Gift className="w-6 h-6 stroke-brand-pink" strokeWidth={1.67} />;
+        return (
+          <Gift className="w-6 h-6 stroke-brand-pink" strokeWidth={1.67} />
+        );
       case "order":
-        return <Package className="w-6 h-6 stroke-blue-600" strokeWidth={1.67} />;
+        return (
+          <Package className="w-6 h-6 stroke-blue-600" strokeWidth={1.67} />
+        );
       case "wishlist":
         return <Heart className="w-6 h-6 stroke-red-500" strokeWidth={1.67} />;
       default:
-        return <Bell className="w-6 h-6 stroke-gray-medium" strokeWidth={1.67} />;
+        return (
+          <Bell className="w-6 h-6 stroke-gray-medium" strokeWidth={1.67} />
+        );
     }
   };
 
@@ -102,18 +110,24 @@ export default function Notifications() {
           <div
             key={notification.id}
             className={`flex gap-4 p-4 rounded-2xl ${
-              notification.read ? "bg-white border border-gray-border" : "bg-[#F9FAFB]"
+              notification.read
+                ? "bg-white border border-gray-border"
+                : "bg-[#F9FAFB]"
             }`}
           >
-            <div className={`w-12 h-12 rounded-full ${getIconBg(notification.type)} flex items-center justify-center flex-shrink-0`}>
+            <div
+              className={`w-12 h-12 rounded-full ${getIconBg(notification.type)} flex items-center justify-center flex-shrink-0`}
+            >
               {getIcon(notification.type)}
             </div>
 
             <div className="flex-1 flex flex-col gap-1">
               <div className="flex justify-between items-start gap-2">
-                <p className={`text-base font-normal tracking-[-0.312px] ${
-                  notification.read ? "text-gray-medium" : "text-gray-dark"
-                }`}>
+                <p
+                  className={`text-base font-normal tracking-[-0.312px] ${
+                    notification.read ? "text-gray-medium" : "text-gray-dark"
+                  }`}
+                >
                   {notification.title}
                 </p>
                 {!notification.read && (

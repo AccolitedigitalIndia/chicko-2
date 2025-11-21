@@ -14,7 +14,12 @@ interface CartContextType {
   items: CartItem[];
   addToCart: (item: Omit<CartItem, "quantity">) => void;
   removeFromCart: (id: number, size: string, color: string) => void;
-  updateQuantity: (id: number, size: string, color: string, quantity: number) => void;
+  updateQuantity: (
+    id: number,
+    size: string,
+    color: string,
+    quantity: number,
+  ) => void;
   clearCart: () => void;
   getTotalItems: () => number;
   getSubtotal: () => number;
@@ -31,7 +36,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         (item) =>
           item.id === newItem.id &&
           item.size === newItem.size &&
-          item.color === newItem.color
+          item.color === newItem.color,
       );
 
       if (existingItem) {
@@ -40,7 +45,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
           item.size === newItem.size &&
           item.color === newItem.color
             ? { ...item, quantity: item.quantity + 1 }
-            : item
+            : item,
         );
       }
 
@@ -52,8 +57,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     setItems((prevItems) =>
       prevItems.filter(
         (item) =>
-          !(item.id === id && item.size === size && item.color === color)
-      )
+          !(item.id === id && item.size === size && item.color === color),
+      ),
     );
   };
 
@@ -61,7 +66,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     id: number,
     size: string,
     color: string,
-    quantity: number
+    quantity: number,
   ) => {
     if (quantity <= 0) {
       removeFromCart(id, size, color);
@@ -72,8 +77,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       prevItems.map((item) =>
         item.id === id && item.size === size && item.color === color
           ? { ...item, quantity }
-          : item
-      )
+          : item,
+      ),
     );
   };
 
