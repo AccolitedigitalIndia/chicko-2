@@ -1,4 +1,13 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
+import { storage } from "@/lib/storage";
+
+const FAVORITES_STORAGE_KEY = "lumiere-favorites";
 
 export interface FavoriteItem {
   id: number;
@@ -20,7 +29,13 @@ const FavoritesContext = createContext<FavoritesContextType | undefined>(
 );
 
 export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
-  const [favorites, setFavorites] = useState<FavoriteItem[]>([]);
+  const [favorites, setFavorites] = useState<FavoriteItem[]>(() => {
+    return storage.get<FavoriteItem[]>(FAVORITES_STORAGE_KEY, []);
+  });
+
+  useEffect(() => {
+    storage.set(FAVORITES_STORAGE_KEY, favorites);
+  }, [favorites]);
 
   const addToFavorites = (item: FavoriteItem) => {
     setFavorites((prev) => {
