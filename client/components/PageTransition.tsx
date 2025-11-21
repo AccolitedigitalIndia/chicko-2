@@ -19,7 +19,9 @@ export function PageTransition({ children }: PageTransitionProps) {
   return (
     <div
       className={`${
-        transitionStage === "fadeOut" ? "animate-out fade-out-0 duration-150" : "animate-in fade-in-0 duration-300"
+        transitionStage === "fadeOut"
+          ? "animate-out fade-out-0 duration-150"
+          : "animate-in fade-in-0 duration-300"
       }`}
       onAnimationEnd={() => {
         if (transitionStage === "fadeOut") {

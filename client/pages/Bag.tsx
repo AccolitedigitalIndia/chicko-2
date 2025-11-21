@@ -31,12 +31,18 @@ export default function Bag() {
       {items.length > 0 && remainingForFreeShipping > 0 && (
         <div className="mx-6 mt-4 px-4 py-3 bg-brand-pink-light border border-brand-pink/20 rounded-lg">
           <p className="text-sm text-brand-burgundy">
-            Add <span className="font-medium">${remainingForFreeShipping.toFixed(2)}</span> more for free shipping!
+            Add{" "}
+            <span className="font-medium">
+              ${remainingForFreeShipping.toFixed(2)}
+            </span>{" "}
+            more for free shipping!
           </p>
           <div className="mt-2 h-2 bg-white rounded-full overflow-hidden">
             <div
               className="h-full bg-brand-pink transition-all duration-300"
-              style={{ width: `${Math.min((subtotal / freeShippingThreshold) * 100, 100)}%` }}
+              style={{
+                width: `${Math.min((subtotal / freeShippingThreshold) * 100, 100)}%`,
+              }}
             />
           </div>
         </div>

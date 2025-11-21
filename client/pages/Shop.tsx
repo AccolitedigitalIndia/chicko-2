@@ -17,7 +17,9 @@ export default function Shop() {
   const [activeFilter, setActiveFilter] = useState(categoryParam || "all");
   const [searchQuery, setSearchQuery] = useState("");
   const [showFilterModal, setShowFilterModal] = useState(false);
-  const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
+  const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(
+    null,
+  );
   const [isLoading, setIsLoading] = useState(true);
   const [filters, setFilters] = useState<FilterState>({
     categories: categoryParam ? [categoryParam] : [],
@@ -43,12 +45,14 @@ export default function Shop() {
     let filtered = [...allProducts];
 
     if (activeFilter !== "all") {
-      filtered = filtered.filter((product) => product.category === activeFilter);
+      filtered = filtered.filter(
+        (product) => product.category === activeFilter,
+      );
     }
 
     if (filters.categories.length > 0 && activeFilter === "all") {
       filtered = filtered.filter((product) =>
-        filters.categories.includes(product.category)
+        filters.categories.includes(product.category),
       );
     }
 
@@ -58,7 +62,7 @@ export default function Shop() {
         (product) =>
           product.name.toLowerCase().includes(query) ||
           product.description.toLowerCase().includes(query) ||
-          product.category.toLowerCase().includes(query)
+          product.category.toLowerCase().includes(query),
       );
     }
 
@@ -68,12 +72,12 @@ export default function Shop() {
     filtered = filtered.filter(
       (product) =>
         displayPrice(product) >= filters.priceRange[0] &&
-        displayPrice(product) <= filters.priceRange[1]
+        displayPrice(product) <= filters.priceRange[1],
     );
 
     if (filters.inStock) {
       filtered = filtered.filter(
-        (product) => product.stock === undefined || product.stock > 0
+        (product) => product.stock === undefined || product.stock > 0,
       );
     }
 
@@ -187,7 +191,8 @@ export default function Shop() {
 
       <div className="px-6 pb-8">
         <p className="text-[#6A7282] text-sm tracking-[-0.15px] mb-4">
-          {filteredProducts.length} {filteredProducts.length === 1 ? "item" : "items"}
+          {filteredProducts.length}{" "}
+          {filteredProducts.length === 1 ? "item" : "items"}
           {searchQuery && ` for "${searchQuery}"`}
         </p>
 

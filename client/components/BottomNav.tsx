@@ -15,7 +15,11 @@ export const BottomNav = () => {
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-border z-50" role="navigation" aria-label="Main navigation">
+    <nav
+      className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-border z-50"
+      role="navigation"
+      aria-label="Main navigation"
+    >
       <div className="flex justify-around items-center px-14 py-3">
         {navItems.map((item) => {
           const isActive = location.pathname === item.path;
@@ -38,7 +42,10 @@ export const BottomNav = () => {
                   aria-hidden="true"
                 />
                 {item.label === "Bag" && totalItems > 0 && (
-                  <div className="absolute -top-1 -right-3 w-5 h-5 bg-brand-pink rounded-full flex items-center justify-center animate-in zoom-in-95 duration-200" aria-label={`${totalItems} items in bag`}>
+                  <div
+                    className="absolute -top-1 -right-3 w-5 h-5 bg-brand-pink rounded-full flex items-center justify-center animate-in zoom-in-95 duration-200"
+                    aria-label={`${totalItems} items in bag`}
+                  >
                     <span className="text-white text-xs font-normal leading-4">
                       {totalItems}
                     </span>

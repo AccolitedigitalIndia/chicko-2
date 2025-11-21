@@ -13,7 +13,8 @@ export function ProductCard({ product, onQuickView }: ProductCardProps) {
   const { toggleFavorite, isFavorite } = useFavorites();
   const isFav = isFavorite(product.id);
   const [imageLoaded, setImageLoaded] = useState(false);
-  const displayPrice = product.onSale && product.salePrice ? product.salePrice : product.price;
+  const displayPrice =
+    product.onSale && product.salePrice ? product.salePrice : product.price;
   const hasDiscount = product.onSale && product.salePrice;
 
   return (
@@ -34,7 +35,7 @@ export function ProductCard({ product, onQuickView }: ProductCardProps) {
           onLoad={() => setImageLoaded(true)}
           loading="lazy"
         />
-        
+
         <div className="absolute top-3 left-3 flex flex-col gap-2">
           {product.isNew && (
             <span className="bg-brand-burgundy text-white px-3 py-1 rounded-full text-xs font-medium tracking-wide">
@@ -46,11 +47,13 @@ export function ProductCard({ product, onQuickView }: ProductCardProps) {
               SALE
             </span>
           )}
-          {product.stock !== undefined && product.stock < 5 && product.stock > 0 && (
-            <span className="bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-medium tracking-wide">
-              {product.stock} LEFT
-            </span>
-          )}
+          {product.stock !== undefined &&
+            product.stock < 5 &&
+            product.stock > 0 && (
+              <span className="bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-medium tracking-wide">
+                {product.stock} LEFT
+              </span>
+            )}
           {product.stock === 0 && (
             <span className="bg-gray-500 text-white px-3 py-1 rounded-full text-xs font-medium tracking-wide">
               OUT OF STOCK
@@ -65,7 +68,11 @@ export function ProductCard({ product, onQuickView }: ProductCardProps) {
               toggleFavorite(product);
             }}
             className="w-9 h-9 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center transition-transform hover:scale-110 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-pink focus-visible:ring-offset-2"
-            aria-label={isFav ? `Remove ${product.name} from favorites` : `Add ${product.name} to favorites`}
+            aria-label={
+              isFav
+                ? `Remove ${product.name} from favorites`
+                : `Add ${product.name} to favorites`
+            }
           >
             <Heart
               className="w-5 h-5 transition-all"
@@ -84,12 +91,16 @@ export function ProductCard({ product, onQuickView }: ProductCardProps) {
               className="w-9 h-9 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center transition-transform hover:scale-110 active:scale-95 opacity-0 group-hover:opacity-100 focus:opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-pink focus-visible:ring-offset-2"
               aria-label={`Quick view ${product.name}`}
             >
-              <Eye className="w-5 h-5 stroke-gray-dark" strokeWidth={1.67} aria-hidden="true" />
+              <Eye
+                className="w-5 h-5 stroke-gray-dark"
+                strokeWidth={1.67}
+                aria-hidden="true"
+              />
             </button>
           )}
         </div>
       </Link>
-      
+
       <Link to={`/product/${product.id}`}>
         <h4 className="text-gray-dark text-base font-normal tracking-[-0.312px] mb-1 line-clamp-2">
           {product.name}

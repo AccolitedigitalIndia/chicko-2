@@ -137,12 +137,12 @@
   }
 
   *::-webkit-scrollbar-thumb {
-    background: #E5E7EB;
+    background: #e5e7eb;
     border-radius: 4px;
   }
 
   *::-webkit-scrollbar-thumb:hover {
-    background: #D1D5DB;
+    background: #d1d5db;
   }
 }
 
@@ -180,7 +180,7 @@
   }
 
   .active\\:scale-90:active {
-    transform: scale(0.90);
+    transform: scale(0.9);
   }
 }
 

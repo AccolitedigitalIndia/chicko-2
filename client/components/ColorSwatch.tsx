@@ -17,9 +17,12 @@ const colorMap: Record<string, string> = {
   Gold: "#FFD700",
   Silver: "#C0C0C0",
   "Rose Gold": "#B76E79",
-  "Floral Multi": "linear-gradient(135deg, #FFB6C1 0%, #4A90E2 50%, #FFD700 100%)",
-  "Navy Floral": "linear-gradient(135deg, #000080 0%, #FFB6C1 50%, #FFFFFF 100%)",
-  "Pink Floral": "linear-gradient(135deg, #FFC0CB 0%, #FFB6C1 50%, #FF69B4 100%)",
+  "Floral Multi":
+    "linear-gradient(135deg, #FFB6C1 0%, #4A90E2 50%, #FFD700 100%)",
+  "Navy Floral":
+    "linear-gradient(135deg, #000080 0%, #FFB6C1 50%, #FFFFFF 100%)",
+  "Pink Floral":
+    "linear-gradient(135deg, #FFC0CB 0%, #FFB6C1 50%, #FF69B4 100%)",
 };
 
 export function ColorSwatch({ color, selected, onClick }: ColorSwatchProps) {
@@ -31,7 +34,9 @@ export function ColorSwatch({ color, selected, onClick }: ColorSwatchProps) {
     <button
       onClick={onClick}
       className={`w-10 h-10 rounded-full border-2 transition-all hover:scale-110 ${
-        selected ? "border-brand-pink ring-2 ring-brand-pink/30" : "border-gray-300"
+        selected
+          ? "border-brand-pink ring-2 ring-brand-pink/30"
+          : "border-gray-300"
       }`}
       style={bgStyle}
       aria-label={`Select ${color}`}

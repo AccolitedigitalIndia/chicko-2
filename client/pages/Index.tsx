@@ -16,7 +16,9 @@ import Autoplay from "embla-carousel-autoplay";
 
 export default function Index() {
   const [showPromoBanner, setShowPromoBanner] = useState(true);
-  const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
+  const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(
+    null,
+  );
   const [isPaused, setIsPaused] = useState(false);
 
   const autoplay = Autoplay({ delay: 4000, stopOnInteraction: true });
@@ -58,7 +60,7 @@ export default function Index() {
 
   const scrollTo = useCallback(
     (index: number) => emblaApi && emblaApi.scrollTo(index),
-    [emblaApi]
+    [emblaApi],
   );
 
   const handleMouseEnter = () => {
@@ -104,7 +106,11 @@ export default function Index() {
         </h1>
       </header>
 
-      <section className="relative w-full h-[400px] overflow-hidden" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      <section
+        className="relative w-full h-[400px] overflow-hidden"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
         <div className="overflow-hidden" ref={emblaRef}>
           <div className="flex">
             {heroImages.map((slide, index) => (
@@ -139,7 +145,9 @@ export default function Index() {
               key={index}
               onClick={() => scrollTo(index)}
               className={`rounded-full transition-all hover:bg-white/80 ${
-                index === currentSlide ? "bg-white w-6 h-2" : "bg-white/50 w-2 h-2"
+                index === currentSlide
+                  ? "bg-white w-6 h-2"
+                  : "bg-white/50 w-2 h-2"
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />

@@ -1,12 +1,24 @@
 import { BottomNav } from "@/components/BottomNav";
 import { useNavigate, useParams, Link } from "react-router-dom";
-import { ChevronLeft, Share2, Heart, Star, ChevronRight, Package } from "lucide-react";
+import {
+  ChevronLeft,
+  Share2,
+  Heart,
+  Star,
+  ChevronRight,
+  Package,
+} from "lucide-react";
 import { useState, useEffect } from "react";
 import { useCart } from "@/context/CartContext";
 import { useFavorites } from "@/context/FavoritesContext";
 import { useRecentlyViewed } from "@/hooks/use-recently-viewed";
 import { toast } from "@/hooks/use-toast";
-import { getProductById, products as allProducts, Product, getCategoryById } from "@shared/products";
+import {
+  getProductById,
+  products as allProducts,
+  Product,
+  getCategoryById,
+} from "@shared/products";
 import ReviewsModal from "@/components/ReviewsModal";
 import { ColorSwatch } from "@/components/ColorSwatch";
 import { ProductCard } from "@/components/ProductCard";
@@ -21,7 +33,9 @@ export default function ProductDetail() {
   const { toggleFavorite, isFavorite } = useFavorites();
   const { addToRecentlyViewed, recentlyViewed } = useRecentlyViewed();
   const [showReviews, setShowReviews] = useState(false);
-  const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
+  const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(
+    null,
+  );
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
@@ -71,7 +85,8 @@ export default function ProductDetail() {
 
   const isFav = isFavorite(product.id);
   const productImages = product.images || [product.image];
-  const displayPrice = product.onSale && product.salePrice ? product.salePrice : product.price;
+  const displayPrice =
+    product.onSale && product.salePrice ? product.salePrice : product.price;
   const hasDiscount = product.onSale && product.salePrice;
 
   const relatedProducts = product.relatedProducts
@@ -188,7 +203,11 @@ export default function ProductDetail() {
         </div>
         <Breadcrumbs
           items={[
-            { label: getCategoryById(product.category)?.name || product.category, href: `/shop?category=${product.category}` },
+            {
+              label:
+                getCategoryById(product.category)?.name || product.category,
+              href: `/shop?category=${product.category}`,
+            },
             { label: product.name },
           ]}
         />

@@ -12,12 +12,12 @@ export function Newsletter() {
 
     setIsSubmitting(true);
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    
+
     toast({
       title: "Successfully subscribed!",
       description: "Thank you for joining our newsletter.",
     });
-    
+
     setEmail("");
     setIsSubmitting(false);
   };
@@ -30,10 +30,12 @@ export function Newsletter() {
         </div>
         <div>
           <h3 className="text-gray-dark text-base font-medium">Stay Updated</h3>
-          <p className="text-gray-medium text-sm">Get exclusive offers & news</p>
+          <p className="text-gray-medium text-sm">
+            Get exclusive offers & news
+          </p>
         </div>
       </div>
-      
+
       <form onSubmit={handleSubmit} className="flex gap-2">
         <input
           type="email"

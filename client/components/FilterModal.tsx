@@ -16,7 +16,12 @@ export interface FilterState {
   inStock: boolean;
 }
 
-export function FilterModal({ isOpen, onClose, onApply, initialFilters }: FilterModalProps) {
+export function FilterModal({
+  isOpen,
+  onClose,
+  onApply,
+  initialFilters,
+}: FilterModalProps) {
   const [filters, setFilters] = useState<FilterState>(initialFilters);
 
   if (!isOpen) return null;
@@ -46,10 +51,20 @@ export function FilterModal({ isOpen, onClose, onApply, initialFilters }: Filter
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-end sm:items-center sm:justify-center" role="dialog" aria-modal="true" aria-labelledby="filter-modal-title">
+    <div
+      className="fixed inset-0 bg-black/50 z-50 flex items-end sm:items-center sm:justify-center"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="filter-modal-title"
+    >
       <div className="bg-white w-full sm:max-w-md sm:rounded-2xl rounded-t-2xl max-h-[90vh] flex flex-col animate-in slide-in-from-bottom duration-300">
         <div className="flex items-center justify-between p-6 border-b border-gray-border">
-          <h2 id="filter-modal-title" className="text-gray-dark text-lg font-medium">Filters</h2>
+          <h2
+            id="filter-modal-title"
+            className="text-gray-dark text-lg font-medium"
+          >
+            Filters
+          </h2>
           <button
             onClick={onClose}
             className="w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-pink"
@@ -61,7 +76,9 @@ export function FilterModal({ isOpen, onClose, onApply, initialFilters }: Filter
 
         <div className="flex-1 overflow-y-auto p-6 space-y-6">
           <div>
-            <h3 className="text-gray-dark text-base font-medium mb-3">Sort By</h3>
+            <h3 className="text-gray-dark text-base font-medium mb-3">
+              Sort By
+            </h3>
             <div className="space-y-2">
               {[
                 { value: "featured", label: "Featured" },
@@ -70,13 +87,18 @@ export function FilterModal({ isOpen, onClose, onApply, initialFilters }: Filter
                 { value: "price-high", label: "Price: High to Low" },
                 { value: "popular", label: "Most Popular" },
               ].map((option) => (
-                <label key={option.value} className="flex items-center gap-3 cursor-pointer">
+                <label
+                  key={option.value}
+                  className="flex items-center gap-3 cursor-pointer"
+                >
                   <input
                     type="radio"
                     name="sortBy"
                     value={option.value}
                     checked={filters.sortBy === option.value}
-                    onChange={(e) => setFilters({ ...filters, sortBy: e.target.value })}
+                    onChange={(e) =>
+                      setFilters({ ...filters, sortBy: e.target.value })
+                    }
                     className="w-4 h-4 text-brand-pink accent-brand-pink"
                   />
                   <span className="text-gray-dark text-sm">{option.label}</span>
@@ -86,24 +108,33 @@ export function FilterModal({ isOpen, onClose, onApply, initialFilters }: Filter
           </div>
 
           <div>
-            <h3 className="text-gray-dark text-base font-medium mb-3">Categories</h3>
+            <h3 className="text-gray-dark text-base font-medium mb-3">
+              Categories
+            </h3>
             <div className="space-y-2">
               {categories.map((category) => (
-                <label key={category.id} className="flex items-center gap-3 cursor-pointer">
+                <label
+                  key={category.id}
+                  className="flex items-center gap-3 cursor-pointer"
+                >
                   <input
                     type="checkbox"
                     checked={filters.categories.includes(category.id)}
                     onChange={() => toggleCategory(category.id)}
                     className="w-4 h-4 text-brand-pink accent-brand-pink rounded"
                   />
-                  <span className="text-gray-dark text-sm">{category.name}</span>
+                  <span className="text-gray-dark text-sm">
+                    {category.name}
+                  </span>
                 </label>
               ))}
             </div>
           </div>
 
           <div>
-            <h3 className="text-gray-dark text-base font-medium mb-3">Price Range</h3>
+            <h3 className="text-gray-dark text-base font-medium mb-3">
+              Price Range
+            </h3>
             <div className="space-y-3">
               <input
                 type="range"
@@ -130,7 +161,9 @@ export function FilterModal({ isOpen, onClose, onApply, initialFilters }: Filter
               <input
                 type="checkbox"
                 checked={filters.inStock}
-                onChange={(e) => setFilters({ ...filters, inStock: e.target.checked })}
+                onChange={(e) =>
+                  setFilters({ ...filters, inStock: e.target.checked })
+                }
                 className="w-4 h-4 text-brand-pink accent-brand-pink rounded"
               />
               <span className="text-gray-dark text-sm">In Stock Only</span>

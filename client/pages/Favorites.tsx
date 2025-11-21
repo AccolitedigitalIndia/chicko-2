@@ -11,7 +11,9 @@ import { useState } from "react";
 
 export default function Favorites() {
   const { favorites } = useFavorites();
-  const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
+  const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(
+    null,
+  );
 
   return (
     <div className="min-h-screen bg-white pb-20">

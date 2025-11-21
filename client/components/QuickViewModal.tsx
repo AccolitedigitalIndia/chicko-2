@@ -37,7 +37,8 @@ export function QuickViewModal({ product, onClose }: QuickViewModalProps) {
   if (!product) return null;
 
   const isFav = isFavorite(product.id);
-  const displayPrice = product.onSale && product.salePrice ? product.salePrice : product.price;
+  const displayPrice =
+    product.onSale && product.salePrice ? product.salePrice : product.price;
   const hasDiscount = product.onSale && product.salePrice;
 
   const handleAddToBag = () => {
@@ -64,13 +65,24 @@ export function QuickViewModal({ product, onClose }: QuickViewModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="quick-view-title">
+    <div
+      className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="quick-view-title"
+    >
       <div
         className="bg-white w-full max-w-2xl rounded-2xl max-h-[90vh] overflow-y-auto animate-in zoom-in-95 duration-200"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="sticky top-0 bg-white border-b border-gray-border p-4 flex items-center justify-between z-10">
-          <h2 id="quick-view-title" className="text-gray-dark text-lg font-medium">Quick View</h2>
+          <h2
+            id="quick-view-title"
+            className="text-gray-dark text-lg font-medium"
+          >
+            Quick View
+          </h2>
           <button
             onClick={onClose}
             className="w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-pink"
@@ -104,7 +116,9 @@ export function QuickViewModal({ product, onClose }: QuickViewModalProps) {
               <p className="text-gray-light text-sm uppercase tracking-wide mb-1">
                 {product.category}
               </p>
-              <h3 className="text-gray-dark text-xl font-medium mb-2">{product.name}</h3>
+              <h3 className="text-gray-dark text-xl font-medium mb-2">
+                {product.name}
+              </h3>
               <div className="flex items-center gap-2 mb-3">
                 <p className="text-brand-pink text-xl font-medium">
                   ${displayPrice.toFixed(2)}
@@ -121,13 +135,17 @@ export function QuickViewModal({ product, onClose }: QuickViewModalProps) {
                     <Star
                       key={star}
                       className="w-4 h-4"
-                      fill={star <= Math.floor(product.rating) ? "#FFB900" : "none"}
+                      fill={
+                        star <= Math.floor(product.rating) ? "#FFB900" : "none"
+                      }
                       stroke="#FFB900"
                       strokeWidth={1.33}
                     />
                   ))}
                 </div>
-                <p className="text-gray-medium text-sm">({product.reviews} reviews)</p>
+                <p className="text-gray-medium text-sm">
+                  ({product.reviews} reviews)
+                </p>
               </div>
             </div>
 
@@ -136,8 +154,12 @@ export function QuickViewModal({ product, onClose }: QuickViewModalProps) {
             </p>
 
             {product.stock !== undefined && (
-              <p className={`text-sm ${product.stock < 5 ? "text-orange-600" : "text-green-600"}`}>
-                {product.stock > 0 ? `${product.stock} in stock` : "Out of stock"}
+              <p
+                className={`text-sm ${product.stock < 5 ? "text-orange-600" : "text-green-600"}`}
+              >
+                {product.stock > 0
+                  ? `${product.stock} in stock`
+                  : "Out of stock"}
               </p>
             )}
 
@@ -164,7 +186,9 @@ export function QuickViewModal({ product, onClose }: QuickViewModalProps) {
               </div>
 
               <div>
-                <span className="text-gray-dark text-sm font-medium mb-2 block">Select Size</span>
+                <span className="text-gray-dark text-sm font-medium mb-2 block">
+                  Select Size
+                </span>
                 <div className="grid grid-cols-5 gap-2">
                   {product.sizes.map((size) => (
                     <button
@@ -187,7 +211,9 @@ export function QuickViewModal({ product, onClose }: QuickViewModalProps) {
               <button
                 onClick={() => toggleFavorite(product)}
                 className="w-12 h-12 border-2 border-gray-border rounded-full flex items-center justify-center hover:border-brand-pink transition-colors"
-                aria-label={isFav ? "Remove from favorites" : "Add to favorites"}
+                aria-label={
+                  isFav ? "Remove from favorites" : "Add to favorites"
+                }
               >
                 <Heart
                   className="w-5 h-5"
