@@ -338,8 +338,8 @@ export default function OrderDetail() {
           <div className="flex flex-col gap-4">
             {order.items.map((item, index) => (
               <div key={index} className="flex gap-4">
-                <div className="w-20 h-24 rounded-[10px] overflow-hidden flex-shrink-0">
-                  <img
+                <div className="w-20 h-24 rounded-[10px] overflow-hidden flex-shrink-0 relative bg-gray-100">
+                  <OptimizedImage
                     src={item.image}
                     alt={item.name}
                     className="w-full h-full object-cover"
