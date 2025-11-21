@@ -2,6 +2,7 @@ import { BottomNav } from "@/components/BottomNav";
 import { useNavigate, useParams } from "react-router-dom";
 import { ChevronLeft, MapPin, CreditCard } from "lucide-react";
 import { products } from "@shared/products";
+import { OptimizedImage } from "@/components/OptimizedImage";
 
 export default function OrderDetail() {
   const navigate = useNavigate();

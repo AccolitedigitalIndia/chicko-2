@@ -2,6 +2,7 @@ import { BottomNav } from "@/components/BottomNav";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft, Package } from "lucide-react";
 import { products } from "@shared/products";
+import { OptimizedImage } from "@/components/OptimizedImage";
 
 interface Order {
   id: string;
