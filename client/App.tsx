@@ -15,6 +15,12 @@ import Profile from "./pages/Profile";
 import ProductDetail from "./pages/ProductDetail";
 import Favorites from "./pages/Favorites";
 import Checkout from "./pages/Checkout";
+import Orders from "./pages/Orders";
+import OrderDetail from "./pages/OrderDetail";
+import Addresses from "./pages/Addresses";
+import PaymentMethods from "./pages/PaymentMethods";
+import Notifications from "./pages/Notifications";
+import Help from "./pages/Help";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -35,6 +41,12 @@ const App = () => (
               <Route path="/product/:id" element={<ProductDetail />} />
               <Route path="/favorites" element={<Favorites />} />
               <Route path="/checkout" element={<Checkout />} />
+              <Route path="/orders" element={<Orders />} />
+              <Route path="/orders/:orderId" element={<OrderDetail />} />
+              <Route path="/addresses" element={<Addresses />} />
+              <Route path="/payment-methods" element={<PaymentMethods />} />
+              <Route path="/notifications" element={<Notifications />} />
+              <Route path="/help" element={<Help />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
