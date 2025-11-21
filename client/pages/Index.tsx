@@ -63,7 +63,10 @@ export default function Index() {
       )}
       <header className="flex justify-center items-center h-28 px-6 bg-gradient-to-b from-brand-pink-light/30 to-white">
         <h1 className="text-brand-burgundy text-3xl font-semibold tracking-wider flex items-center gap-3">
-          <Sparkles className="w-8 h-8 stroke-brand-burgundy fill-brand-pink/10" strokeWidth={2} />
+          <Sparkles
+            className="w-8 h-8 stroke-brand-burgundy fill-brand-pink/10"
+            strokeWidth={2}
+          />
           LUMIÈRE
         </h1>
       </header>
