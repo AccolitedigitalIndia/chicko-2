@@ -57,6 +57,17 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        brand: {
+          burgundy: "#8B0836",
+          pink: "#EC003F",
+          "pink-light": "#FFF1F2",
+        },
+        gray: {
+          dark: "#101828",
+          medium: "#4A5565",
+          light: "#99A1AF",
+          border: "#E5E7EB",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
