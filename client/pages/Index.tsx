@@ -73,7 +73,10 @@ export default function Index() {
               <p className="text-white/90 text-base font-normal tracking-[-0.312px]">
                 {slide.subtitle}
               </p>
-              <Link to="/shop" className="bg-white text-brand-burgundy px-8 py-3 rounded-full text-base font-normal tracking-[-0.312px] mt-2">
+              <Link
+                to="/shop"
+                className="bg-white text-brand-burgundy px-8 py-3 rounded-full text-base font-normal tracking-[-0.312px] mt-2"
+              >
                 Shop Now
               </Link>
             </div>
@@ -86,9 +89,7 @@ export default function Index() {
               key={index}
               onClick={() => setCurrentSlide(index)}
               className={`w-2 h-2 rounded-full transition-all ${
-                index === currentSlide
-                  ? "bg-white w-6"
-                  : "bg-white/50"
+                index === currentSlide ? "bg-white w-6" : "bg-white/50"
               }`}
             />
           ))}
@@ -118,7 +119,10 @@ export default function Index() {
                 </span>
                 <div className="flex items-center gap-1">
                   <span className="text-white/80 text-xs">Explore</span>
-                  <ChevronRight className="w-4 h-4 stroke-white/80" strokeWidth={1.67} />
+                  <ChevronRight
+                    className="w-4 h-4 stroke-white/80"
+                    strokeWidth={1.67}
+                  />
                 </div>
               </div>
             </Link>

@@ -24,7 +24,8 @@ const reviews: Review[] = [
     userName: "Sarah M.",
     rating: 5,
     date: "2 days ago",
-    comment: "Absolutely love this! The quality is exceptional and fits perfectly. Will definitely buy again.",
+    comment:
+      "Absolutely love this! The quality is exceptional and fits perfectly. Will definitely buy again.",
     verified: true,
   },
   {
@@ -32,7 +33,8 @@ const reviews: Review[] = [
     userName: "Emily R.",
     rating: 5,
     date: "1 week ago",
-    comment: "Beautiful piece! The fabric is so soft and the color is exactly as shown. Highly recommend!",
+    comment:
+      "Beautiful piece! The fabric is so soft and the color is exactly as shown. Highly recommend!",
     verified: true,
   },
   {
@@ -40,7 +42,8 @@ const reviews: Review[] = [
     userName: "Jessica L.",
     rating: 4,
     date: "2 weeks ago",
-    comment: "Great quality and fast shipping. Runs slightly small so I'd recommend sizing up.",
+    comment:
+      "Great quality and fast shipping. Runs slightly small so I'd recommend sizing up.",
     verified: true,
   },
   {
@@ -48,7 +51,8 @@ const reviews: Review[] = [
     userName: "Amanda K.",
     rating: 5,
     date: "3 weeks ago",
-    comment: "This exceeded my expectations! So elegant and comfortable. Perfect for any occasion.",
+    comment:
+      "This exceeded my expectations! So elegant and comfortable. Perfect for any occasion.",
     verified: false,
   },
   {
@@ -56,7 +60,8 @@ const reviews: Review[] = [
     userName: "Rachel P.",
     rating: 4,
     date: "1 month ago",
-    comment: "Very nice quality. The only reason I'm giving 4 stars is because it took a bit longer to arrive than expected.",
+    comment:
+      "Very nice quality. The only reason I'm giving 4 stars is because it took a bit longer to arrive than expected.",
     verified: true,
   },
   {
@@ -72,7 +77,8 @@ const reviews: Review[] = [
     userName: "Lauren T.",
     rating: 5,
     date: "2 months ago",
-    comment: "Perfect fit and beautiful design. This is my third purchase from this brand!",
+    comment:
+      "Perfect fit and beautiful design. This is my third purchase from this brand!",
     verified: true,
   },
   {
@@ -115,11 +121,8 @@ export default function ReviewsModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">
-      <div
-        className="absolute inset-0 bg-black/50"
-        onClick={onClose}
-      />
-      
+      <div className="absolute inset-0 bg-black/50" onClick={onClose} />
+
       <div className="relative bg-white rounded-t-3xl sm:rounded-3xl w-full max-w-2xl max-h-[90vh] flex flex-col">
         <div className="sticky top-0 bg-white rounded-t-3xl border-b border-gray-border px-6 py-4 flex items-center justify-between z-10">
           <h2 className="text-gray-dark text-lg font-normal tracking-[-0.312px]">
@@ -145,7 +148,9 @@ export default function ReviewsModal({
                     <Star
                       key={star}
                       className="w-4 h-4"
-                      fill={star <= Math.floor(averageRating) ? "#FFB900" : "none"}
+                      fill={
+                        star <= Math.floor(averageRating) ? "#FFB900" : "none"
+                      }
                       stroke="#FFB900"
                       strokeWidth={1.33}
                     />
@@ -159,15 +164,22 @@ export default function ReviewsModal({
               <div className="flex-1 flex flex-col gap-2">
                 {ratingDistribution.map(({ stars, count }) => (
                   <div key={stars} className="flex items-center gap-2">
-                    <span className="text-sm text-gray-medium w-4">{stars}</span>
-                    <Star className="w-3 h-3 fill-[#FFB900] stroke-[#FFB900]" strokeWidth={1.33} />
+                    <span className="text-sm text-gray-medium w-4">
+                      {stars}
+                    </span>
+                    <Star
+                      className="w-3 h-3 fill-[#FFB900] stroke-[#FFB900]"
+                      strokeWidth={1.33}
+                    />
                     <div className="flex-1 h-2 bg-gray-border rounded-full overflow-hidden">
                       <div
                         className="h-full bg-[#FFB900]"
                         style={{ width: `${(count / totalReviews) * 100}%` }}
                       />
                     </div>
-                    <span className="text-sm text-gray-medium w-8 text-right">{count}</span>
+                    <span className="text-sm text-gray-medium w-8 text-right">
+                      {count}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -176,7 +188,10 @@ export default function ReviewsModal({
 
           <div className="space-y-4">
             {reviews.map((review) => (
-              <div key={review.id} className="pb-4 border-b border-gray-border last:border-0">
+              <div
+                key={review.id}
+                className="pb-4 border-b border-gray-border last:border-0"
+              >
                 <div className="flex items-start justify-between mb-2">
                   <div>
                     <div className="flex items-center gap-2 mb-1">
