@@ -2,6 +2,7 @@ import { BottomNav } from "@/components/BottomNav";
 import { useNavigate, useParams } from "react-router-dom";
 import { ChevronLeft, MapPin, CreditCard } from "lucide-react";
 import { products } from "@shared/products";
+import { OptimizedImage } from "@/components/OptimizedImage";
 
 export default function OrderDetail() {
   const navigate = useNavigate();
@@ -338,8 +339,8 @@ export default function OrderDetail() {
           <div className="flex flex-col gap-4">
             {order.items.map((item, index) => (
               <div key={index} className="flex gap-4">
-                <div className="w-20 h-24 rounded-[10px] overflow-hidden flex-shrink-0">
-                  <img
+                <div className="w-20 h-24 rounded-[10px] overflow-hidden flex-shrink-0 relative bg-gray-100">
+                  <OptimizedImage
                     src={item.image}
                     alt={item.name}
                     className="w-full h-full object-cover"

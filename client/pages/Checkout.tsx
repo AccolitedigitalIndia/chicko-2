@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 import { useState } from "react";
 import { toast } from "@/hooks/use-toast";
+import { OptimizedImage } from "@/components/OptimizedImage";
 
 export default function Checkout() {
   const navigate = useNavigate();
@@ -347,8 +348,8 @@ export default function Checkout() {
                   key={`${item.id}-${item.size}-${item.color}`}
                   className="flex gap-3"
                 >
-                  <div className="w-16 h-20 rounded-[10px] overflow-hidden flex-shrink-0">
-                    <img
+                  <div className="w-16 h-20 rounded-[10px] overflow-hidden flex-shrink-0 relative bg-gray-100">
+                    <OptimizedImage
                       src={item.image}
                       alt={item.name}
                       className="w-full h-full object-cover"

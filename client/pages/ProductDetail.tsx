@@ -25,6 +25,7 @@ import { ProductCard } from "@/components/ProductCard";
 import { QuickViewModal } from "@/components/QuickViewModal";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import useEmblaCarousel from "embla-carousel-react";
+import { OptimizedImage } from "@/components/OptimizedImage";
 
 export default function ProductDetail() {
   const navigate = useNavigate();
@@ -218,7 +219,7 @@ export default function ProductDetail() {
           <div className="flex">
             {productImages.map((img, index) => (
               <div key={index} className="flex-[0_0_100%] min-w-0 relative">
-                <img
+                <OptimizedImage
                   src={img}
                   alt={`${product.name} - Image ${index + 1}`}
                   className="w-full h-[480px] object-cover"

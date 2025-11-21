@@ -9,13 +9,24 @@ import {
   HelpCircle,
   LogOut,
   ChevronRight,
+  Edit2,
+  Check,
+  X,
 } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useFavorites } from "@/context/FavoritesContext";
+import { useUser } from "@/context/UserContext";
+import { useState } from "react";
+import { toast } from "@/hooks/use-toast";
 
 export default function Profile() {
   const { getTotalItems } = useCart();
   const { favorites } = useFavorites();
+  const { user, updateUserName, updateUserEmail } = useUser();
+  const [isEditingName, setIsEditingName] = useState(false);
+  const [editedName, setEditedName] = useState(user.name || "");
+  const [isEditingEmail, setIsEditingEmail] = useState(false);
+  const [editedEmail, setEditedEmail] = useState(user.email || "");
 
   const menuItems = [
     { icon: Package, label: "My Orders", path: "/orders", badge: 3 },
@@ -41,20 +52,115 @@ export default function Profile() {
         <div className="flex items-center gap-4 p-6 rounded-2xl bg-brand-pink-light">
           <div className="w-16 h-16 rounded-full bg-brand-pink flex items-center justify-center flex-shrink-0">
             <span className="text-white text-xl font-normal tracking-[-0.449px]">
-              JD
+              {user.name
+                ? user.name
+                    .split(" ")
+                    .map((n) => n[0])
+                    .join("")
+                    .toUpperCase()
+                    .slice(0, 2)
+                : "U"}
             </span>
           </div>
-          <div className="flex-1 flex flex-col gap-1">
-            <h3 className="text-gray-dark text-base font-normal tracking-[-0.312px]">
-              Jane Doe
-            </h3>
-            <p className="text-gray-medium text-sm tracking-[-0.15px]">
-              jane.doe@email.com
-            </p>
+          <div className="flex-1 flex flex-col gap-2">
+            {isEditingName ? (
+              <div className="flex items-center gap-2">
+                <input
+                  type="text"
+                  value={editedName}
+                  onChange={(e) => setEditedName(e.target.value)}
+                  className="flex-1 px-3 py-1.5 rounded-lg border border-gray-border text-sm focus:outline-none focus:ring-2 focus:ring-brand-pink/20"
+                  autoFocus
+                  maxLength={50}
+                />
+                <button
+                  onClick={() => {
+                    if (editedName.trim()) {
+                      updateUserName(editedName.trim());
+                      setIsEditingName(false);
+                      toast({
+                        title: "Name updated",
+                        description: "Your profile has been updated successfully.",
+                      });
+                    }
+                  }}
+                  className="p-1.5 rounded-full hover:bg-white/50 transition-colors"
+                >
+                  <Check className="w-4 h-4 stroke-green-600" />
+                </button>
+                <button
+                  onClick={() => {
+                    setEditedName(user.name || "");
+                    setIsEditingName(false);
+                  }}
+                  className="p-1.5 rounded-full hover:bg-white/50 transition-colors"
+                >
+                  <X className="w-4 h-4 stroke-red-600" />
+                </button>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2">
+                <h3 className="text-gray-dark text-base font-normal tracking-[-0.312px]">
+                  {user.name || "Set your name"}
+                </h3>
+                <button
+                  onClick={() => setIsEditingName(true)}
+                  className="p-1 rounded-full hover:bg-white/50 transition-colors"
+                >
+                  <Edit2 className="w-4 h-4 stroke-brand-pink" />
+                </button>
+              </div>
+            )}
+
+            {isEditingEmail ? (
+              <div className="flex items-center gap-2">
+                <input
+                  type="email"
+                  value={editedEmail}
+                  onChange={(e) => setEditedEmail(e.target.value)}
+                  className="flex-1 px-3 py-1.5 rounded-lg border border-gray-border text-sm focus:outline-none focus:ring-2 focus:ring-brand-pink/20"
+                  autoFocus
+                  maxLength={100}
+                />
+                <button
+                  onClick={() => {
+                    if (editedEmail.trim()) {
+                      updateUserEmail(editedEmail.trim());
+                      setIsEditingEmail(false);
+                      toast({
+                        title: "Email updated",
+                        description: "Your email has been updated successfully.",
+                      });
+                    }
+                  }}
+                  className="p-1.5 rounded-full hover:bg-white/50 transition-colors"
+                >
+                  <Check className="w-4 h-4 stroke-green-600" />
+                </button>
+                <button
+                  onClick={() => {
+                    setEditedEmail(user.email || "");
+                    setIsEditingEmail(false);
+                  }}
+                  className="p-1.5 rounded-full hover:bg-white/50 transition-colors"
+                >
+                  <X className="w-4 h-4 stroke-red-600" />
+                </button>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2">
+                <p className="text-gray-medium text-sm tracking-[-0.15px]">
+                  {user.email || "Add email address"}
+                </p>
+                <button
+                  onClick={() => setIsEditingEmail(true)}
+                  className="p-1 rounded-full hover:bg-white/50 transition-colors"
+                >
+                  <Edit2 className="w-3.5 h-3.5 stroke-gray-medium" />
+                </button>
+              </div>
+            )}
           </div>
-          <button className="text-brand-pink text-sm font-normal tracking-[-0.15px]">
-            Edit
-          </button>
         </div>
       </div>
 

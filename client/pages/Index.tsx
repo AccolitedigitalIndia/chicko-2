@@ -5,7 +5,7 @@ import {
   categories as allCategories,
   products as allProducts,
 } from "@shared/products";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { ProductCard } from "@/components/ProductCard";
 import { QuickViewModal } from "@/components/QuickViewModal";
 import { Newsletter } from "@/components/Newsletter";
@@ -13,6 +13,9 @@ import { BackToTop } from "@/components/BackToTop";
 import { Product } from "@shared/products";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
+import { OptimizedImage } from "@/components/OptimizedImage";
+import { PersonalizedGreeting } from "@/components/PersonalizedGreeting";
+import { WelcomeModal } from "@/components/WelcomeModal";
 
 export default function Index() {
   const [showPromoBanner, setShowPromoBanner] = useState(true);
@@ -21,8 +24,10 @@ export default function Index() {
   );
   const [isPaused, setIsPaused] = useState(false);
 
-  const autoplay = Autoplay({ delay: 4000, stopOnInteraction: true });
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [autoplay]);
+  const autoplayRef = useRef(
+    Autoplay({ delay: 4000, stopOnInteraction: true })
+  );
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [autoplayRef.current]);
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const heroImages = [
@@ -63,15 +68,29 @@ export default function Index() {
     [emblaApi],
   );
 
-  const handleMouseEnter = () => {
-    autoplay.stop();
-    setIsPaused(true);
-  };
+  const handleMouseEnter = useCallback(() => {
+    const autoplay = autoplayRef.current;
+    if (autoplay && typeof autoplay.stop === 'function') {
+      try {
+        autoplay.stop();
+        setIsPaused(true);
+      } catch (error) {
+        console.warn('Autoplay stop error:', error);
+      }
+    }
+  }, []);
 
-  const handleMouseLeave = () => {
-    autoplay.play();
-    setIsPaused(false);
-  };
+  const handleMouseLeave = useCallback(() => {
+    const autoplay = autoplayRef.current;
+    if (autoplay && typeof autoplay.play === 'function') {
+      try {
+        autoplay.play();
+        setIsPaused(false);
+      } catch (error) {
+        console.warn('Autoplay play error:', error);
+      }
+    }
+  }, []);
 
   const categoryLinks = allCategories.map((cat) => ({
     name: cat.name,
@@ -96,7 +115,7 @@ export default function Index() {
           </button>
         </div>
       )}
-      <header className="flex justify-center items-center h-28 px-6 bg-gradient-to-b from-brand-pink-light/30 to-white">
+      <header className="relative flex justify-center items-center h-28 px-6 bg-gradient-to-b from-brand-pink-light/30 to-white">
         <h1 className="text-brand-burgundy text-3xl font-semibold tracking-wider flex items-center gap-3">
           <Sparkles
             className="w-8 h-8 stroke-brand-burgundy fill-brand-pink/10"
@@ -104,6 +123,7 @@ export default function Index() {
           />
           LUMIÈRE
         </h1>
+        <PersonalizedGreeting />
       </header>
 
       <section
@@ -115,7 +135,7 @@ export default function Index() {
           <div className="flex">
             {heroImages.map((slide, index) => (
               <div key={index} className="flex-[0_0_100%] min-w-0 relative">
-                <img
+                <OptimizedImage
                   src={slide.url}
                   alt={slide.title}
                   className="w-full h-[400px] object-cover"
@@ -166,7 +186,7 @@ export default function Index() {
               to={`/shop?category=${category.id}`}
               className="relative rounded-2xl overflow-hidden h-40 group"
             >
-              <img
+              <OptimizedImage
                 src={category.image}
                 alt={category.name}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
@@ -223,6 +243,7 @@ export default function Index() {
         product={quickViewProduct}
         onClose={() => setQuickViewProduct(null)}
       />
+      <WelcomeModal />
     </div>
   );
 }

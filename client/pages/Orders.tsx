@@ -2,6 +2,7 @@ import { BottomNav } from "@/components/BottomNav";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft, Package } from "lucide-react";
 import { products } from "@shared/products";
+import { OptimizedImage } from "@/components/OptimizedImage";
 
 interface Order {
   id: string;
@@ -74,10 +75,10 @@ export default function Orders() {
             onClick={() => navigate(`/orders/${order.id}`)}
             className="flex gap-4 p-4 rounded-2xl bg-[#F9FAFB] text-left"
           >
-            <div className="w-20 h-24 rounded-[10px] overflow-hidden flex-shrink-0">
-              <img
+            <div className="w-20 h-24 rounded-[10px] overflow-hidden flex-shrink-0 relative bg-gray-100">
+              <OptimizedImage
                 src={order.image}
-                alt="Order"
+                alt={order.productName}
                 className="w-full h-full object-cover"
               />
             </div>

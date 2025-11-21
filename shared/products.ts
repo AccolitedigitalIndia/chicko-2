@@ -28,7 +28,7 @@ export const categories: Category[] = [
     id: "tops",
     name: "Tops",
     image:
-      "https://images.pexels.com/photos/4355793/pexels-photo-4355793.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/30468634/pexels-photo-30468634.jpeg?auto=compress&cs=tinysrgb&w=1200",
   },
   {
     id: "dresses",
@@ -40,7 +40,7 @@ export const categories: Category[] = [
     id: "bottoms",
     name: "Bottoms",
     image:
-      "https://images.pexels.com/photos/6467707/pexels-photo-6467707.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/818992/pexels-photo-818992.jpeg?auto=compress&cs=tinysrgb&w=1200",
   },
   {
     id: "accessories",
