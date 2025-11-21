@@ -549,6 +549,13 @@ export default function ProductDetail() {
         product={quickViewProduct}
         onClose={() => setQuickViewProduct(null)}
       />
+
+      <StorePickerModal
+        isOpen={showStorePicker}
+        onClose={() => setShowStorePicker(false)}
+        onSelectStore={setSelectedStore}
+        selectedStore={selectedStore}
+      />
     </div>
   );
 }
